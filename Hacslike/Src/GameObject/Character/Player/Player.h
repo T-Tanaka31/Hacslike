@@ -263,7 +263,8 @@ public:		//	メンバ関数
 	/// </summary>
 	void NewPlayerSetUp();
 
-	
+
+	void ResetHitItem() { hitItem = nullptr; }
 
 	// 装備の効果を考慮して atk を再計算して適用する
 	void UpdateAtkFromEquipment();

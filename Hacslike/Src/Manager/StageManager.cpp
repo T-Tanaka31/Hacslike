@@ -141,6 +141,9 @@ void StageManager::GenerateStage() {
 	Coin::GetInstance()->ResetAll();
 	//アイテムの削除
 	ItemDropManager::GetInstance().RemoveItemAll();
+
+	Player::GetInstance()->ResetHitItem();
+
 	// 階層の加算
 	floorCount++;
 	// ステージのデータを作る
@@ -211,6 +214,9 @@ void StageManager::GenerateStage(int stageID) {
 	Coin::GetInstance()->ResetAll();
 	//アイテムの削除
 	ItemDropManager::GetInstance().RemoveItemAll();
+
+	Player::GetInstance()->ResetHitItem();
+
 	// フロアの加算
 	floorCount++;
 	// フロアデータの読み込み

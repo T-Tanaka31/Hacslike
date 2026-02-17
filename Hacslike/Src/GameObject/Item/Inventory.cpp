@@ -950,7 +950,7 @@ void Inventory::Save(BinaryWriter& w) {
 		int qty = inv.quantity;
 		w.WritePOD(qty);
 		inv.item->SaveTo(w);
-		printfDx("%d\n", inv.item->GetEffectValue());
+		//printfDx("%d\n", inv.item->GetEffectValue());
 
 #if _DEBUG
 		//printfDx("%sを保存\n", Id.c_str());
@@ -992,7 +992,7 @@ void Inventory::Load(BinaryReader& r) {
 		// 追加：アイテムが成功裏に生成された場合に固有データを復元
 		if (item) {
 			item->LoadFrom(r); // 固有データのロード
-			printfDx("%d\n", item->GetEffectValue());
+			//printfDx("%d\n", item->GetEffectValue());
 			items.emplace_back(std::move(item), qty);
 		}
 		else {
