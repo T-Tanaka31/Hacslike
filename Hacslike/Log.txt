@@ -1,399 +1,153 @@
 ﻿0:ChangeWindowMode実行 
 0:ウインドウモードフラグが立てられました
-2:ＤＸライブラリの初期化処理開始
-2:	システムの情報を出力します
-2:		ＤＸライブラリ Ver3.24b
+0:ＤＸライブラリの初期化処理開始
+0:	システムの情報を出力します
+3:		ＤＸライブラリ Ver3.24b
 3:		論理プロセッサの数 : 20
 3:		ＯＳ  Windows11 ( Build 26100  )
-103:		現時点のＣＰＵ動作速度：大体3.59GHz
-103:		ＭＭＸ命令を使用します
-103:		ＳＳＥ命令が使用可能です
-103:		ＳＳＥ２命令が使用可能です
-103:		ＣＰＵベンダ：GenuineIntel
-104:		ＣＰＵ名：12th Gen Intel(R) Core(TM) i7-12700KF
-104:	ＣＯＭの初期化... 成功
-108:	非同期読み込み処理の初期化...成功
-109:	ファイルアクセス処理の初期化...成功
-109:	メモリ総量:32560.16MB  空きメモリ領域:15672.08MB 
-110:	タイマーの精度を検査します
-110:	精度結果 更新回数 マルチメディアタイマー：0  パフォーマンスカウンター：60
-110:	 パフォーマンスカウンターを使用します タイマー精度 : 10000.000000 KHz 
-110:	 
-111:	ソフトの二重起動検査... 二重起動はされていませんでした
-111:	ウインドウクラスを登録します... 登録に成功しました
-111:	ウインドウモード起動用のウインドウを作成します
-112:	ディスプレイ情報のセットアップ開始
-112:		モニターの数：2  ディスプレイデバイスの数：4
-112:		No.0  モニター名：\\.\DISPLAY1　1920x1080　32bit　60Hz  96x96dpi
-114:		No.1  モニター名：\\.\DISPLAY2　1920x1080　32bit　60Hz  96x96dpi
-122:	ディスプレイ情報のセットアップ完了
-123:	ウインドウ矩形 ( -16, -50 )-( 1920, 1069 )
-126:	ウインドウの作成に成功しました
-126:	ウインドウを表示します
-138:	ＩＭＥを無効にしました
-139:	ウインドウスタイルをウインドウモード用に変更します... 完了
-171:	XInput DLL の読み込み中... 成功
-171:	DirectInput関係初期化処理
-171:		DirectInput8 の取得を試みます...成功
-248:			引き続き初期化処理... 初期化成功
-250:		ジョイパッドの初期化... 
-251:			XInput 対応コントローラーのチェックを開始します
-251:				XInput 対応コントローラー No.0 をチェック
-251:				XInput 対応コントローラー No.0 の接続は確認できませんでした
-251:				XInput 対応コントローラー No.1 をチェック
-251:				XInput 対応コントローラー No.1 の接続は確認できませんでした
-251:				XInput 対応コントローラー No.2 をチェック
-252:				XInput 対応コントローラー No.2 の接続は確認できませんでした
-252:				XInput 対応コントローラー No.3 をチェック
-252:				XInput 対応コントローラー No.3 の接続は確認できませんでした
-252:			XInput 対応コントローラーのチェック完了
-252:			DirectInput 対応ジョイパッドの列挙を開始します
-398:			DirectInput 対応ジョイパッドの列挙終了
-398:		ジョイパッドの初期化は正常に終了しました
-398:		マウスデバイスの初期化... 初期化成功
-399:		キーボードデバイスの初期化... 初期化成功
-401:	DirectInput 関連の初期化は正常に終了しました
-403:	WASAPI の初期化を行います
-410:		デバイス名 : PHL 271E1 (NVIDIA High Definition Audio)
-492:		デフォルト遅延時間 : 10.000 ms
-492:		最小遅延時間       : 3.000 ms
-492:		遅延時間           : 10.000 ms
-492:		チャンネル数  　   : 2 ch
-493:		量子化ビット深度   : 32 bit
-493:		有効ビット深度　   : 32 bit
-493:		サンプリングレート : 48000 Hz
-493:		データ形式         : 浮動小数点型
-509:		動作モード         : 共有モード
-509:	WASAPI の初期化は正常に終了しました
-512:	d3d11.dll の読み込み.... 成功
-515:	dxgi.dll の読み込み.... 成功
-515:	API CreateDXGIFactory2 のアドレスを取得します.... 成功
-515:	IDXGIFactory2 を作成します.... 成功
-530:	API CreateDXGIFactory6 のアドレスを取得します.... 成功
-530:	IDXGIAdapter を列挙
-530:		Adapter No.0 Desc:NVIDIA GeForce RTX 3070  VRAM:8018MB
-531:			Output Device No.0 Name:\\.\DISPLAY1 ( 0, 0 )-( 1920, 1080 )
-531:			Output Device No.1 Name:\\.\DISPLAY2 ( 0, -1080 )-( 1920, 0 )
-531:		Adapter No.1 Desc:Microsoft Basic Render Driver  VRAM:0MB
-531:	API D3D11CreateDevice のアドレスを取得します.... 成功
-532:	IDXGIAdapter を取得します.... 成功
-532:	IDXGIAdapter1 を取得します.... 成功
-532:	IDXGIAdapter2 を取得します.... 成功
-532:	IDXGIAdapter3 を取得します.... 成功
-533:	IDXGIAdapter4 を取得します.... 成功
-533:	Direct3D 11 FeatureLevel 11_0 以上を対象とします
-533:	ID3D11Device オブジェクトを取得します.... 成功
-679:	IDXGIDevice1 を取得します.... 成功
-680:	IDXGIDevice1->SetMaximunFrameLatency( 1 ); を実行しました
-680:	[ウインドウモード 1920x1080 ( 0, 0 )-( 1920, 1080 )]
-680:	IDXGISwapChain2 を作成します.... 成功
-681:	IDXGIFactory2->CreateSwapChainForHwnd の戻り値：0x00000000
-681:	IDXGIOutput を取得します.... 成功
-682:	Graphics Device:NVIDIA GeForce RTX 3070
-682:	画面のフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-683:	16bit Zバッファフォーマットは DXGI_FORMAT_D16_UNORM です
-683:	24bit Zバッファフォーマットは DXGI_FORMAT_D24_UNORM_S8_UINT です
-683:	32bit Zバッファフォーマットは DXGI_FORMAT_D32_FLOAT です
-683:	16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
-683:	32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
-683:	アルファ付き 16bit カラーフォーマットは DXGI_FORMAT_B4G4R4A4_UNORM です
-684:	アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-684:	アルファテスト用 16bit カラーフォーマットは DXGI_FORMAT_B5G5R5A1_UNORM です
-684:	アルファテスト用 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-684:	ＤＸＴ１テクスチャフォーマットは DXGI_FORMAT_BC1_UNORM です
-684:	ＤＸＴ２テクスチャフォーマットは使えません
-684:	ＤＸＴ３テクスチャフォーマットは DXGI_FORMAT_BC2_UNORM です
-685:	ＤＸＴ４テクスチャフォーマットは使えません
-685:	ＤＸＴ５テクスチャフォーマットは DXGI_FORMAT_BC3_UNORM です
-685:	BC7_UNORM テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM です
-685:	BC7_UNORM_SRGB テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM_SRGB です
-685:	ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
-685:	ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
-685:	ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
-687:	１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
-687:	１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
-687:	１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
-687:	１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
-687:	２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
-687:	２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
-688:	２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
-688:	２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
-688:	描画用 16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
-688:	描画用 32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
-688:	描画用アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
-688:	描画用 ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
-689:	描画用 ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
-689:	描画用 ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
-689:	描画用１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
-689:	描画用１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
-689:	描画用１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
-689:	描画用１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
-690:	描画用２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
-690:	描画用２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
-690:	描画用２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
-690:	描画用２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
-690:	使用する機能レベル:D3D_FEATURE_LEVEL_11_1
-691:	同時にレンダリングできるバッファの数:8
-691:	最大テクスチャサイズ　幅:16384 高さ:16384
-691:	標準描画用の頂点バッファの作成.... 成功
-692:	シェーダーコード関係の初期化.... 成功
-703:	各種シェーダー用定数バッファの作成.... 成功
-703:	各種 ID3D11InputLayout の作成.... 成功
-713:	画像の単純転送処理の初期化... 成功
-714:	深度バッファを作成します.... 成功
-715:	フォントの初期化を行います
-718:	フォントの初期化は正常に終了しました
-804:	文字コードバッファの初期化を行います... 完了しました
-822:ＤＸライブラリの初期化処理終了
-1615:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Weapon\Sabel\sabel.mv1
-2601:File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Audio\BGM\MainGame\NormalFloor.mp3
-2602:Sound File Load Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Audio\BGM\MainGame\NormalFloor.mp3
-7301:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\f.png がありません
-7301:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\fn.png がありません
-7302:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\w.png がありません
-7302:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\wn.png がありません
-7303:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\f.png がありません
-7303:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\fn.png がありません
-7303:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\w.png がありません
-7303:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\wn.png がありません
-7304:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\f.png がありません
-7304:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\fn.png がありません
-7305:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\w.png がありません
-7305:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\wn.png がありません
-7305:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\f.png がありません
-7306:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\fn.png がありません
-7306:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\w.png がありません
-7306:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\wn.png がありません
-7307:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\f.png がありません
-7307:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\fn.png がありません
-7307:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\w.png がありません
-7308:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Stage\Texture\wn.png がありません
-9086:グラフの構築に失敗しましたModel File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-28910:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-28924:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-28924:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-28925:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-28928:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-28928:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-28929:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-28929:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-28930:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-28932:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-28933:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-28934:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-28934:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-28934:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-28954:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-28966:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-28967:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-28967:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-28971:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-28972:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-28972:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-28972:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-28975:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-28975:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-28977:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-28977:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-28977:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-28981:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-28981:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-28982:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-28982:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-28982:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-28985:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-28987:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-28987:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-28988:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-28990:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-28991:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-28992:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-28992:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-28992:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-28995:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-28997:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-28997:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-28997:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29000:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29000:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29001:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29001:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29002:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29009:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29009:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29010:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29010:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29011:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29014:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29014:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29015:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29015:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29015:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29018:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29019:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29019:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29019:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29023:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29024:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29024:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29024:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29028:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29029:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29029:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29030:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29037:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29037:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29038:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29038:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29038:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29041:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29042:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29043:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29043:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29043:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29046:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29047:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29047:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29047:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29050:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29050:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29052:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29053:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29053:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29055:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29056:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29057:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29057:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29057:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29060:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29060:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29062:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29063:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29063:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29066:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29066:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29067:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29068:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29068:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29075:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29075:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29077:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29077:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29077:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29080:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29080:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29081:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29082:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29082:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29085:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29085:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29087:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29087:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29087:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29094:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29095:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29096:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29096:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29096:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29099:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29100:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29101:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29101:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29104:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29106:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29106:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29107:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29110:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29111:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29111:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29112:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29133:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29133:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29135:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29135:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29138:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29138:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29139:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29139:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29139:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29142:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29143:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29144:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29144:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29153:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29153:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29154:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29154:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29158:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29159:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29159:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29160:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-29163:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack02.mv1
-29163:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\attack03.mv1
-29164:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\run.mv1
-29164:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\dropdown.mv1
-29164:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Spider\situp.mv1
-29169:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\attack03.mv1
-29169:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\run.mv1
-29170:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\dropdown.mv1
-29170:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Model\Enemy\Wolf\situp.mv1
-79783:ジョイパッドの初期化... 
-79783:	XInput 対応コントローラーのチェックを開始します
-79784:		XInput 対応コントローラー No.0 をチェック
-79788:		XInput 対応コントローラー No.0 の接続は確認できませんでした
-79788:		XInput 対応コントローラー No.1 をチェック
-79789:		XInput 対応コントローラー No.1 の接続は確認できませんでした
-79789:		XInput 対応コントローラー No.2 をチェック
-79789:		XInput 対応コントローラー No.2 の接続は確認できませんでした
-79789:		XInput 対応コントローラー No.3 をチェック
-79789:		XInput 対応コントローラー No.3 の接続は確認できませんでした
-79790:	XInput 対応コントローラーのチェック完了
-79790:	DirectInput 対応ジョイパッドの列挙を開始します
-80000:	DirectInput 対応ジョイパッドの列挙終了
-80000:ジョイパッドの初期化は正常に終了しました
-80001:ジョイパッドの初期化... 
-80001:	XInput 対応コントローラーのチェックを開始します
-80001:		XInput 対応コントローラー No.0 をチェック
-80001:		XInput 対応コントローラー No.0 の接続は確認できませんでした
-80002:		XInput 対応コントローラー No.1 をチェック
-80002:		XInput 対応コントローラー No.1 の接続は確認できませんでした
-80002:		XInput 対応コントローラー No.2 をチェック
-80002:		XInput 対応コントローラー No.2 の接続は確認できませんでした
-80003:		XInput 対応コントローラー No.3 をチェック
-80003:		XInput 対応コントローラー No.3 の接続は確認できませんでした
-80003:	XInput 対応コントローラーのチェック完了
-80003:	DirectInput 対応ジョイパッドの列挙を開始します
-80151:	DirectInput 対応ジョイパッドの列挙終了
-80151:ジョイパッドの初期化は正常に終了しました
-80152:ジョイパッドの初期化... 
-80152:	XInput 対応コントローラーのチェックを開始します
-80152:		XInput 対応コントローラー No.0 をチェック
-80152:		XInput 対応コントローラー No.0 の接続は確認できませんでした
-80152:		XInput 対応コントローラー No.1 をチェック
-80153:		XInput 対応コントローラー No.1 の接続は確認できませんでした
-80153:		XInput 対応コントローラー No.2 をチェック
-80153:		XInput 対応コントローラー No.2 の接続は確認できませんでした
-80153:		XInput 対応コントローラー No.3 をチェック
-80153:		XInput 対応コントローラー No.3 の接続は確認できませんでした
-80153:	XInput 対応コントローラーのチェック完了
-80154:	DirectInput 対応ジョイパッドの列挙を開始します
-80299:	DirectInput 対応ジョイパッドの列挙終了
-80299:ジョイパッドの初期化は正常に終了しました
-95589:画像ファイル C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike がありません
-106735:フォントの初期化を行います
-106736:フォントの初期化は正常に終了しました
-106777:d3d11.dll の解放 1
-106778:dxgi.dll の解放 1
-106778:Direct3D11 のオブジェクト数を出力
-106778:Direct3D11 のオブジェクト合計数 : 0
-106784:DirectInput 関連の終了処理... 完了
-106785:サウンド関連の終了処理... 完了
-106809:ウィンドウ関連の終了処理... ウインドウを閉じようとしています
-106813:ウインドウが破棄されようとしています
-106814:ソフトを終了する準備が整いました
-106863:完了
-106875:ＣＯＭを終了... 完了
-106875:
-106876:Alloc memory dump
-106876:	Total size:0(0.000kb)  Alloc num:0
-106876:
+105:		現時点のＣＰＵ動作速度：大体3.63GHz
+105:		ＭＭＸ命令を使用します
+105:		ＳＳＥ命令が使用可能です
+105:		ＳＳＥ２命令が使用可能です
+106:		ＣＰＵベンダ：GenuineIntel
+107:		ＣＰＵ名：12th Gen Intel(R) Core(TM) i7-12700KF
+107:	ＣＯＭの初期化... 成功
+119:	非同期読み込み処理の初期化...成功
+119:	ファイルアクセス処理の初期化...成功
+120:	メモリ総量:32560.16MB  空きメモリ領域:19209.89MB 
+120:	タイマーの精度を検査します
+121:	精度結果 更新回数 マルチメディアタイマー：1  パフォーマンスカウンター：60
+121:	 パフォーマンスカウンターを使用します タイマー精度 : 10000.000000 KHz 
+121:	 
+121:	ソフトの二重起動検査... 二重起動はされていませんでした
+122:	ウインドウクラスを登録します... 登録に成功しました
+122:	ウインドウモード起動用のウインドウを作成します
+122:	ディスプレイ情報のセットアップ開始
+123:		モニターの数：2  ディスプレイデバイスの数：4
+123:		No.0  モニター名：\\.\DISPLAY1　1920x1080　32bit　60Hz  96x96dpi
+123:		No.1  モニター名：\\.\DISPLAY2　1920x1080　32bit　60Hz  96x96dpi
+131:	ディスプレイ情報のセットアップ完了
+132:	ウインドウ矩形 ( -16, -50 )-( 1920, 1069 )
+136:	ウインドウの作成に成功しました
+136:	ウインドウを表示します
+146:	ＩＭＥを無効にしました
+147:	ウインドウスタイルをウインドウモード用に変更します... 完了
+181:	XInput DLL の読み込み中... 成功
+181:	DirectInput関係初期化処理
+181:		DirectInput8 の取得を試みます...成功
+259:			引き続き初期化処理... 初期化成功
+261:		ジョイパッドの初期化... 
+261:			XInput 対応コントローラーのチェックを開始します
+262:				XInput 対応コントローラー No.0 をチェック
+262:				XInput 対応コントローラー No.0 の接続は確認できませんでした
+262:				XInput 対応コントローラー No.1 をチェック
+262:				XInput 対応コントローラー No.1 の接続は確認できませんでした
+263:				XInput 対応コントローラー No.2 をチェック
+263:				XInput 対応コントローラー No.2 の接続は確認できませんでした
+263:				XInput 対応コントローラー No.3 をチェック
+263:				XInput 対応コントローラー No.3 の接続は確認できませんでした
+264:			XInput 対応コントローラーのチェック完了
+264:			DirectInput 対応ジョイパッドの列挙を開始します
+410:			DirectInput 対応ジョイパッドの列挙終了
+411:		ジョイパッドの初期化は正常に終了しました
+411:		マウスデバイスの初期化... 初期化成功
+411:		キーボードデバイスの初期化... 初期化成功
+414:	DirectInput 関連の初期化は正常に終了しました
+417:	WASAPI の初期化を行います
+423:		デバイス名 : PHL 271E1 (NVIDIA High Definition Audio)
+430:		デフォルト遅延時間 : 10.000 ms
+430:		最小遅延時間       : 3.000 ms
+430:		遅延時間           : 10.000 ms
+431:		チャンネル数  　   : 2 ch
+431:		量子化ビット深度   : 32 bit
+431:		有効ビット深度　   : 32 bit
+431:		サンプリングレート : 48000 Hz
+431:		データ形式         : 浮動小数点型
+448:		動作モード         : 共有モード
+448:	WASAPI の初期化は正常に終了しました
+452:	d3d11.dll の読み込み.... 成功
+455:	dxgi.dll の読み込み.... 成功
+456:	API CreateDXGIFactory2 のアドレスを取得します.... 成功
+456:	IDXGIFactory2 を作成します.... 成功
+466:	API CreateDXGIFactory6 のアドレスを取得します.... 成功
+466:	IDXGIAdapter を列挙
+466:		Adapter No.0 Desc:NVIDIA GeForce RTX 3070  VRAM:8018MB
+467:			Output Device No.0 Name:\\.\DISPLAY1 ( 0, 0 )-( 1920, 1080 )
+467:			Output Device No.1 Name:\\.\DISPLAY2 ( 0, -1080 )-( 1920, 0 )
+467:		Adapter No.1 Desc:Microsoft Basic Render Driver  VRAM:0MB
+467:	API D3D11CreateDevice のアドレスを取得します.... 成功
+468:	IDXGIAdapter を取得します.... 成功
+468:	IDXGIAdapter1 を取得します.... 成功
+469:	IDXGIAdapter2 を取得します.... 成功
+469:	IDXGIAdapter3 を取得します.... 成功
+469:	IDXGIAdapter4 を取得します.... 成功
+469:	Direct3D 11 FeatureLevel 11_0 以上を対象とします
+470:	ID3D11Device オブジェクトを取得します.... 成功
+613:	IDXGIDevice1 を取得します.... 成功
+614:	IDXGIDevice1->SetMaximunFrameLatency( 1 ); を実行しました
+614:	[ウインドウモード 1920x1080 ( 0, 0 )-( 1920, 1080 )]
+614:	IDXGISwapChain2 を作成します.... 成功
+615:	IDXGIFactory2->CreateSwapChainForHwnd の戻り値：0x00000000
+616:	IDXGIOutput を取得します.... 成功
+616:	Graphics Device:NVIDIA GeForce RTX 3070
+616:	画面のフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
+617:	16bit Zバッファフォーマットは DXGI_FORMAT_D16_UNORM です
+617:	24bit Zバッファフォーマットは DXGI_FORMAT_D24_UNORM_S8_UINT です
+617:	32bit Zバッファフォーマットは DXGI_FORMAT_D32_FLOAT です
+617:	16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
+617:	32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
+617:	アルファ付き 16bit カラーフォーマットは DXGI_FORMAT_B4G4R4A4_UNORM です
+617:	アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
+617:	アルファテスト用 16bit カラーフォーマットは DXGI_FORMAT_B5G5R5A1_UNORM です
+618:	アルファテスト用 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
+618:	ＤＸＴ１テクスチャフォーマットは DXGI_FORMAT_BC1_UNORM です
+618:	ＤＸＴ２テクスチャフォーマットは使えません
+618:	ＤＸＴ３テクスチャフォーマットは DXGI_FORMAT_BC2_UNORM です
+618:	ＤＸＴ４テクスチャフォーマットは使えません
+618:	ＤＸＴ５テクスチャフォーマットは DXGI_FORMAT_BC3_UNORM です
+619:	BC7_UNORM テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM です
+619:	BC7_UNORM_SRGB テクスチャフォーマットは DXGI_FORMAT_BC7_UNORM_SRGB です
+619:	ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
+619:	ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
+619:	ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
+619:	１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
+619:	１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
+620:	１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
+620:	１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
+620:	２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
+620:	２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
+620:	２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
+620:	２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
+620:	描画用 16bit カラーフォーマットは DXGI_FORMAT_B5G6R5_UNORM です
+621:	描画用 32bit カラーフォーマットは DXGI_FORMAT_B8G8R8X8_UNORM です
+621:	描画用アルファ付き 32bit カラーフォーマットは DXGI_FORMAT_R8G8B8A8_UNORM です
+621:	描画用 ABGR 整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_UNORM です
+621:	描画用 ABGR 浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16B16A16_FLOAT です
+621:	描画用 ABGR 浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32B32A32_FLOAT です
+621:	描画用１チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8_UNORM です
+621:	描画用１チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_UNORM です
+622:	描画用１チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16_FLOAT です
+622:	描画用１チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32_FLOAT です
+622:	描画用２チャンネル整数 8 ビット型カラーフォーマットは DXGI_FORMAT_R8G8_UNORM です
+622:	描画用２チャンネル整数 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_UNORM です
+622:	描画用２チャンネル浮動小数点 16 ビット型カラーフォーマットは DXGI_FORMAT_R16G16_FLOAT です
+622:	描画用２チャンネル浮動小数点 32 ビット型カラーフォーマットは DXGI_FORMAT_R32G32_FLOAT です
+622:	使用する機能レベル:D3D_FEATURE_LEVEL_11_1
+622:	同時にレンダリングできるバッファの数:8
+623:	最大テクスチャサイズ　幅:16384 高さ:16384
+623:	標準描画用の頂点バッファの作成.... 成功
+623:	シェーダーコード関係の初期化.... 成功
+634:	各種シェーダー用定数バッファの作成.... 成功
+635:	各種 ID3D11InputLayout の作成.... 成功
+645:	画像の単純転送処理の初期化... 成功
+646:	深度バッファを作成します.... 成功
+648:	フォントの初期化を行います
+649:	フォントの初期化は正常に終了しました
+734:	文字コードバッファの初期化を行います... 完了しました
+751:ＤＸライブラリの初期化処理終了
+1260:Model File Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Weapon\Sabel\sabel.mv1
+1863:ウインドウを閉じようとしています
+1867:ウインドウが破棄されようとしています
+1867:ソフトを終了する準備が整いました
+1870:MP3変換の途中でソフトが終了しましたMP3変換の途中でソフトが終了しましたMP3変換の途中でソフトが終了しましたMP3変換の途中でソフトが終了しましたMP3変換の途中でソフトが終了しましたMP3変換の途中でソフトが終了しましたFile Open Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Audio\BGM\MainGame\NormalFloor.mp3
+2118:Sound File Load Error : C:\Users\student1\Desktop\課題制作Ⅲ\Hacslike\Hacslike\Res\Audio\BGM\MainGame\NormalFloor.mp3
