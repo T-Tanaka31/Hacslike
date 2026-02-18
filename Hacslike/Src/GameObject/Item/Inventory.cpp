@@ -950,7 +950,7 @@ void Inventory::Save(BinaryWriter& w) {
 		int qty = inv.quantity;
 		w.WritePOD(qty);
 		inv.item->SaveTo(w);
-		printfDx("%d\n", inv.item->GetEffectValue());
+		//////printfDx("%d\n", inv.item->GetEffectValue());
 
 #if _DEBUG
 		//printfDx("%sを保存\n", Id.c_str());

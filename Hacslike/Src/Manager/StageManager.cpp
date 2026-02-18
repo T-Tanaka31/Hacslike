@@ -49,7 +49,7 @@ void StageManager::Update() {
 	if ((InputManager::GetInstance().IsButtonDown(XINPUT_GAMEPAD_DPAD_DOWN) || InputManager::GetInstance().IsKeyDown(KEY_INPUT_DOWN)) && (InputManager::GetInstance().IsButton(XINPUT_GAMEPAD_DPAD_DOWN) || InputManager::GetInstance().IsKey(KEY_INPUT_LSHIFT))) {
 		LoadFloorData();
 
-		floorCount += 9;
+		floorCount += 1;
 
 		AudioManager::GetInstance().Stop("all");
 		if (floorCount % BossFloorNum == 0) {

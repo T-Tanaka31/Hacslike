@@ -45,7 +45,8 @@
     "startFloor": 51,
     "endFloor": 60,
     "floorTextureName": "",
-    "spawnEnemyID": [ -1]
+    "floorBGMName": "",
+    "spawnEnemyID": [ -1 ]
   },
   {
     "startFloor": 61,
