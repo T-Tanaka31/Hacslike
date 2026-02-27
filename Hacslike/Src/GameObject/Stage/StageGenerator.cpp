@@ -574,47 +574,88 @@ void StageGenerator::GenerateStageData() {
 /// </summary>
 /// <param name="stageID"></param>
 void StageGenerator::LoadStageData(int stageID) {
-	// ステージのデータを読み込む
-	auto data = LoadJsonFile("Src/Data/StageData.json");
-	for (auto s : data) {
-		// 指定のステージIDと同じステージを探す
-		if (s["id"] != stageID) continue;
+	ClearStage(); // 既存のクリア処理
 
-		stage.id = stageID;
-		stage.playerSpawnPos = VGet(s["playerSpawnPos"][0], 0, s["playerSpawnPos"][1]);
-		stage.saveObjectPos = VGet(s["saveObjectPos"][0], 0, s["saveObjectPos"][1]);
-		stage.chestObjectPos = VGet(s["ChestObjectPos"][0], 0, s["ChestObjectPos"][1]);
-		stage.enhancementStonePos = VGet(s["enhancementStonePos"][0], 0, s["enhancementStonePos"][1]);
-		stage.itemShopPos = VGet(s["itemShopPos"][0], 0, s["itemShopPos"][1]);
-		stage.bossSpawnPos = VGet(s["bossSpawnPos"][0], 0, s["bossSpawnPos"][1]);
-		stage.bossType = s["bossType"];
-		stage.stairSpawnPos = VGet(s["stairSpawnPos"][0], 0, s["stairSpawnPos"][1]);
-		stage.returnerSpawnPos = VGet(s["returnerSpawnPos"][0], 0, s["returnerSpawnPos"][1]);
+	std::string jsonPath = "Src/Data/StageData.json";
+	std::string datPath = "Src/Data/StageData.dat";
 
-		stage.closePosArray.clear();
+	// 1. データがまだキャッシュにない場合のみ読み込み
+	if (stageCache.empty()) {
+		std::ifstream jsonFile(jsonPath);
+		if (jsonFile.is_open()) {
+			// 【開発モード】JSONから全ステージ読み込み
+			nlohmann::json jData;
+			jsonFile >> jData;
 
-		for (const auto& p : s["closePos"]) {
-			if (!p.is_array()) {
-				continue;
+			for (auto& s : jData) {
+				StageData sd;
+				sd.id = s["id"];
+				sd.playerSpawnPos = VGet(s["playerSpawnPos"][0], 0, s["playerSpawnPos"][1]);
+				sd.saveObjectPos = VGet(s["saveObjectPos"][0], 0, s["saveObjectPos"][1]);
+				sd.chestObjectPos = VGet(s["ChestObjectPos"][0], 0, s["ChestObjectPos"][1]);
+				sd.enhancementStonePos = VGet(s["enhancementStonePos"][0], 0, s["enhancementStonePos"][1]);
+				sd.itemShopPos = VGet(s["itemShopPos"][0], 0, s["itemShopPos"][1]);
+				sd.bossSpawnPos = VGet(s["bossSpawnPos"][0], 0, s["bossSpawnPos"][1]);
+				sd.bossType = s["bossType"];
+				sd.stairSpawnPos = VGet(s["stairSpawnPos"][0], 0, s["stairSpawnPos"][1]);
+				sd.returnerSpawnPos = VGet(s["returnerSpawnPos"][0], 0, s["returnerSpawnPos"][1]);
+				sd.bgmName = s.value("floorBGMName", "");
+
+				// 閉鎖座標の読み込み
+				sd.closePosArray.clear();
+				for (const auto& p : s["closePos"]) {
+					if (p.is_array()) sd.closePosArray.push_back(VGet(p[0], 0, p[1]));
+				}
+
+				// マップデータの読み込み
+				for (int i = 0; i < mapWidth_Large; i++) {
+					for (int j = 0; j < mapHeight_Large; j++) {
+						sd.stageData[i][j] = s["stageData"][i][j].is_null() ? 1 : (int)s["stageData"][i][j];
+					}
+				}
+				stageCache[sd.id] = sd;
 			}
 
-			int px = p[0].get<int>();
-			int pz = p[1].get<int>();
-
-			stage.closePosArray.push_back(VGet(px, 0, pz));
+			// Msgpackとして保存
+			std::ofstream outFile(datPath, std::ios::binary);
+			msgpack::pack(outFile, stageCache);
+			outFile.close();
 		}
+		else {
+			// 【製品モード】バイナリから全ステージ読み込み
+			std::ifstream datFile(datPath, std::ios::binary);
+			if (datFile.is_open()) {
+				std::vector<char> buffer((std::istreambuf_iterator<char>(datFile)), std::istreambuf_iterator<char>());
+				datFile.close();
 
-		stage.bgmName = s["floorBGMName"];
-
-		for (int i = 0; i < mapWidth_Large; i++) {
-			for (int j = 0; j < mapHeight_Large; j++) {
-				if (s["stageData"][i][j] == nullptr) continue;
-
-				// ステージのデータを入れる
-				map[i][j] = s["stageData"][i][j];
+				if (!buffer.empty()) {
+					try {
+						// unpackの戻り値を直接使わず、一旦 handle で受ける
+						auto handle = msgpack::unpack(buffer.data(), buffer.size());
+						handle.get().convert(stageCache);
+						printfDx("Msgpack(Stage)のロードに成功しました。\n");
+					}
+					catch (const std::exception& e) {
+						printfDx("Msgpack Load Error: %s\n", e.what());
+					}
+				}
 			}
 		}
 	}
+
+	// 2. キャッシュから対象のIDを今のステージ（this->stage）にコピー
+	if (stageCache.count(stageID)) {
+		this->stage = stageCache[stageID];
+
+		// メンバのmap二次元配列にも反映
+		for (int i = 0; i < mapWidth_Large; i++) {
+			for (int j = 0; j < mapHeight_Large; j++) {
+				map[i][j] = this->stage.stageData[i][j];
+			}
+		}
+	}
+
+	// 元の処理の続き（mapWidthの設定やルーム構築など）
 	mapWidth = mapWidth_Small;
 	mapHeight = mapHeight_Small;
 
@@ -648,19 +689,27 @@ void StageGenerator::LoadStageData(int stageID) {
 }
 
 void StageGenerator::LoadStageMeta(int stageID) {
-	auto data = LoadJsonFile("Src/Data/StageData.json");
-	for (auto s : data) {
-		if (s["id"] != stageID) continue;
+	// もしキャッシュが空なら、一度ロード処理を走らせて全データを読み込む
+	if (stageCache.empty()) {
+		LoadStageData(stageID);
+	}
+
+	// キャッシュに対象のステージIDがあるか確認
+	if (stageCache.count(stageID)) {
+		const auto& s = stageCache[stageID];
 
 		stage.id = stageID;
-		stage.playerSpawnPos = VGet(s["playerSpawnPos"][0], 0, s["playerSpawnPos"][1]);
-		stage.saveObjectPos = VGet(s["saveObjectPos"][0], 0, s["saveObjectPos"][1]);
-		stage.chestObjectPos = VGet(s["ChestObjectPos"][0], 0, s["ChestObjectPos"][1]);
-		stage.enhancementStonePos = VGet(s["enhancementStonePos"][0], 0, s["enhancementStonePos"][1]);
-		stage.itemShopPos = VGet(s["itemShopPos"][0], 0, s["itemShopPos"][1]);
-		stage.bossSpawnPos = VGet(s["bossSpawnPos"][0], 0, s["bossSpawnPos"][1]);
-		stage.bossType = s["bossType"];
-		break;
+		stage.playerSpawnPos = s.playerSpawnPos;
+		stage.saveObjectPos = s.saveObjectPos;
+		stage.chestObjectPos = s.chestObjectPos;
+		stage.enhancementStonePos = s.enhancementStonePos;
+		stage.itemShopPos = s.itemShopPos;
+		stage.bossSpawnPos = s.bossSpawnPos;
+		stage.bossType = s.bossType;
+		// その他、必要であれば stager.bgmName などもここでセット
+	}
+	else {
+		printfDx("Error: Stage ID %d not found in cache.\n", stageID);
 	}
 }
 

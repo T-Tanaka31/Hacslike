@@ -5,6 +5,7 @@
 #include "../../../Component/Collider/SphereHitBox.h"
 #include "../../../Manager/AudioManager.h"
 #include "Other/AttackArea.h"
+#include <msgpack.hpp>
 
 class Enemy : public Character {
 protected:
@@ -65,6 +66,8 @@ protected:
 	// ボスか
 	bool isBoss = false;
 
+	EnemyData m_param; // JSONから読み込んだデータを保持する変数
+
 	// 道のり
 	std::list<VECTOR> moveRoots;
 	VECTOR currentRoot;
@@ -82,7 +85,6 @@ protected:
 	float attack03ColliderRadius;
 
 	float deadAnimationTime;
-
 public:
 	Enemy();
 	~Enemy();
@@ -141,6 +143,7 @@ public:
 	virtual void OnTriggerExit(Collider* _pOther) override;
 
 public:
+
 	// 既に存在するメソッド群の補完として追加
 	VECTOR GetPosition() const { return position; }            // もし Character にあるなら不要
 	float GetRotationY() const { return rotation.y; }
@@ -163,5 +166,12 @@ public:
 	Collider* GetCollider() const { return pCollider; }
 
 	bool IsBoss() { return isBoss; }
+
+	void InitializeData(const EnemyData* data) {
+		if (data) {
+			m_param = *data; // 構造体をコピー
+		}
+	}
+
 };
 

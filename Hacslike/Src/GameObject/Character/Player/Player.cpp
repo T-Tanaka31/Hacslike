@@ -236,17 +236,27 @@ void Player::Start() {
 
 	pAnimator->Play(0);
 
-	WeaponManager::GetInstance().LoadWeapons("Src/Data/WeaponsData.json");
+	WeaponManager::GetInstance().LoadWeapons();
 	maxWeaponId = WeaponManager::GetInstance().GetMaxWeaponId();
 	changeWeaponButtonPressed = false;
 	currentWeaponId = 10;
 	weaponData = WeaponManager::GetInstance().GetWeapon(currentWeaponId);
 	if (weaponData) {
 		pWeapon = new Weapon(weaponData->name, weaponData->modelHandle);
-		pWeapon->SetColLength(weaponData->colLength);
-		pWeapon->SetColRadius(weaponData->colRadius);
+
+		// std::array<float, N> 型に変換して渡す
+		pWeapon->SetColLength(std::array<float, 3>{
+			weaponData->colLength[0], weaponData->colLength[1], weaponData->colLength[2]
+		});
+		pWeapon->SetColRadius(std::array<float, 3>{
+			weaponData->colRadius[0], weaponData->colRadius[1], weaponData->colRadius[2]
+		});
 		pWeapon->SetType((WeaponType)weaponData->type);
-		pWeapon->SetAnimationSpeed(weaponData->attackSpeed);
+		pWeapon->SetAnimationSpeed(std::array<float, 4>{
+			weaponData->attackSpeed[0], weaponData->attackSpeed[1],
+				weaponData->attackSpeed[2], weaponData->attackSpeed[3]
+		});
+
 		pWeapon->attach(modelHandle, pWeapon->GetModelHandle(), "wp", this);
 	}
 
@@ -580,11 +590,19 @@ void Player::ChangeWeapon(int weaponId) {
 	if (!weaponData) return;
 
 	pWeapon->ChangeModel(weaponData->modelHandle);
-
 	pWeapon->SetType(static_cast<WeaponType>(weaponData->type));
-	pWeapon->SetColLength(weaponData->colLength);
-	pWeapon->SetColRadius(weaponData->colRadius);
-	pWeapon->SetAnimationSpeed(weaponData->attackSpeed);
+
+	// 同様に std::array で渡す
+	pWeapon->SetColLength(std::array<float, 3>{
+		weaponData->colLength[0], weaponData->colLength[1], weaponData->colLength[2]
+	});
+	pWeapon->SetColRadius(std::array<float, 3>{
+		weaponData->colRadius[0], weaponData->colRadius[1], weaponData->colRadius[2]
+	});
+	pWeapon->SetAnimationSpeed(std::array<float, 4>{
+		weaponData->attackSpeed[0], weaponData->attackSpeed[1],
+			weaponData->attackSpeed[2], weaponData->attackSpeed[3]
+	});
 
 	playerAttack->SetWeapon(pWeapon);
 }

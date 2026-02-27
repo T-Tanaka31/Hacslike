@@ -2,59 +2,97 @@
 #include <fstream>
 #include <iostream>
 
+namespace fs = std::filesystem;
 
-WeaponManager::WeaponManager() {
-}
+WeaponManager::WeaponManager() {}
+WeaponManager::~WeaponManager() { UnloadAllWeapons(); }
 
-WeaponManager::~WeaponManager() {
-}
+void WeaponManager::LoadWeapons() {
+    UnloadAllWeapons();
 
-void WeaponManager::LoadWeapons(const std::string& path) {
-    std::ifstream file(path);
-    if (!file.is_open()) {
-        std::cerr << "Failed to open: " << path << std::endl;
-        return;
+    // ファイル名に「s」を付けて統一
+    const std::string jsonPath = "Src/Data/WeaponsData.json";
+    const std::string datPath = "Src/Data/WeaponsData.dat";
+
+    // フォルダの自動作成
+    try { std::filesystem::create_directories("Src/Data"); }
+    catch (...) {}
+
+    std::ifstream jsonFile(jsonPath);
+
+    if (jsonFile.is_open()) {
+        // ==========================================
+        // 【開発モード】JSONから読み込み
+        // ==========================================
+        nlohmann::json data;
+        try {
+            jsonFile >> data;
+        }
+        catch (const nlohmann::json::parse_error& e) {
+            return;
+        }
+
+        for (auto& w : data) {
+            if (!w.contains("id")) continue;
+
+            WeaponData weapon;
+            weapon.id = w["id"];
+            weapon.name = w.value("name", "Unknown");
+            weapon.modelPath = w.value("modelPath", "");
+            weapon.type = w.value("type", 0);
+
+            // 各配列の読み込み (attackSpeed, colLength, colRadius)
+            auto fillArray = [&](const std::string& key, float* target, int size) {
+                if (w.contains(key) && w[key].is_array()) {
+                    for (int i = 0; i < size; i++) {
+                        target[i] = (i < (int)w[key].size()) ? w[key][i].get<float>() : 1.0f;
+                    }
+                }
+            };
+
+            fillArray("attackSpeed", weapon.attackSpeed, ATTACK_SPEED_NUM);
+            fillArray("colLength", weapon.colLength, COL_LENGTH_NUM);
+            fillArray("colRadius", weapon.colRadius, COL_RADIUS_NUM);
+
+            // モデルのロード
+            if (!weapon.modelPath.empty()) {
+                weapon.modelHandle = MV1LoadModel(weapon.modelPath.c_str());
+            }
+
+            weaponTable[weapon.id] = weapon;
+        }
+
+        // --- WeaponsData.dat として保存 ---
+        std::ofstream outFile(datPath, std::ios::binary);
+        if (outFile.is_open()) {
+            msgpack::pack(outFile, weaponTable);
+            outFile.close();
+        }
     }
+    else {
+        // ==========================================
+        // 【製品モード】バイナリ(.dat)から読み込み
+        // ==========================================
+        std::ifstream datFile(datPath, std::ios::binary);
+        if (!datFile.is_open()) return;
 
-    nlohmann::json data;
-    file >> data;
+        std::vector<char> buffer((std::istreambuf_iterator<char>(datFile)), std::istreambuf_iterator<char>());
+        datFile.close();
 
-    for (auto& w : data) {
-        if (!w.contains("id")) continue; // ヘッダ行除外
-        WeaponData weapon;
-        weapon.id = w["id"];
-        weapon.name = w["name"];
-        weapon.modelPath = w["modelPath"];
-        weapon.type = w["type"];
-        if (w.contains("attackSpeed") && w["attackSpeed"].is_array()) {
-            for (int i = 0; i < ATTACK_SPEED_NUM; i++) {
-                weapon.attackSpeed[i] = (i < w["attackSpeed"].size()) ? w["attackSpeed"][i].get<float>() : 1.0f;
+        if (buffer.empty()) return;
+
+        try {
+            auto oh = msgpack::unpack(buffer.data(), buffer.size());
+            oh.get().convert(weaponTable);
+
+            // モデルの再紐付け
+            for (auto& [id, weapon] : weaponTable) {
+                if (!weapon.modelPath.empty()) {
+                    weapon.modelHandle = MV1LoadModel(weapon.modelPath.c_str());
+                }
             }
         }
-        else {
-            weapon.attackSpeed =  DEFAULT_ATTACK_SPEED ;
-        }
-        if (w.contains("colLength") && w["colLength"].is_array()) {
-            for (int i = 0; i < COL_LENGTH_NUM; i++) {
-                weapon.colLength[i] = (i < w["colLength"].size()) ? w["colLength"][i].get<float>() : 1.0f;
-            }
-        }
-        else {
-            weapon.colLength = DEFAULT_COL_LENGTH;
-        }
-        if (w.contains("colRadius") && w["colRadius"].is_array()) {
-            for (int i = 0; i < COL_RADIUS_NUM; i++) {
-                weapon.colRadius[i] = (i < w["colRadius"].size()) ? w["colRadius"][i].get<float>() : 1.0f;
-            }
-        }
-        else {
-            weapon.colRadius = DEFAULT_COL_RADIUS;
-        }
-        weapon.modelHandle = MV1LoadModel(weapon.modelPath.c_str());
-        if (weapon.modelHandle == -1)
-            std::cerr << "Failed to load model: " << weapon.modelPath << std::endl;
-
-        weaponTable[weapon.id] = weapon;
+        catch (...) {}
     }
 }
 
@@ -66,8 +104,10 @@ WeaponData* WeaponManager::GetWeapon(int id) {
 
 void WeaponManager::UnloadAllWeapons() {
     for (auto& pair : weaponTable) {
-        if (pair.second.modelHandle != -1)
+        if (pair.second.modelHandle != -1) {
             MV1DeleteModel(pair.second.modelHandle);
+            pair.second.modelHandle = -1;
+        }
     }
     weaponTable.clear();
 }

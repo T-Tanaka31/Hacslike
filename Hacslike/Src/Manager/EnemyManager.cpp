@@ -17,18 +17,21 @@
 #include "../GameObject/Character/Enemy/Boss/Ketbleperz/BossKetbleperz.h"
 #include "../GameObject/Character/Enemy/Boss/Durahan/BossDurahan.h"
 #include "../Manager/AudioManager.h"
-#include"../Save/SaveIO.h"
+#include "../Save/SaveIO.h"
 
 EnemyManager::EnemyManager() {
 	Start();
 }
 
 EnemyManager::~EnemyManager() {
-
 	DeleteAllEnemy();
 }
 
 void EnemyManager::Start() {
+	// 1. データのロード（WeaponManagerと設計を統一）
+	LoadEnemyData();
+
+	// 2. 音声リソースのロード
 	AudioManager* manager = &AudioManager::GetInstance();
 	manager->Load(audioFilePath + "SwordSwing.mp3", "SwordSwing", false);
 	manager->Load(audioFilePath + "Impact.mp3", "Impact", false);
@@ -41,6 +44,7 @@ void EnemyManager::Start() {
 	manager->Load(audioFilePath + "Punch2.mp3", "Punch2", false);
 	manager->Load(audioFilePath + "HeadBang.mp3", "HeadBang", false);
 
+	// 3. 各エネミーの生成用ユーティリティを初期化
 	goblin = new EnemyUtility([this]() {return new EnemyGoblin(MV1DuplicateModel(goblin->originModelHandle)); }, MV1LoadModel("Res/Model/Enemy/Goblin/model.mv1"));
 	spider = new EnemyUtility([this]() {return new EnemySpider(MV1DuplicateModel(spider->originModelHandle)); }, MV1LoadModel("Res/Model/Enemy/Spider/model.mv1"));
 	wolf = new EnemyUtility([this]() {return new EnemyWolf(MV1DuplicateModel(wolf->originModelHandle)); }, MV1LoadModel("Res/Model/Enemy/Wolf/model.mv1"));
@@ -72,11 +76,11 @@ void EnemyManager::Update() {
 		e->Update();
 	}
 
-	// pEnemyArrayから安全に消すため
-	for (int i = 0; i < unuseEnemy.size();) {
-		Enemy* e = unuseEnemy.front();
+	// 未使用リストへの移動処理
+	for (auto it = unuseEnemy.begin(); it != unuseEnemy.end(); ) {
+		Enemy* e = *it;
 		pEnemyArray.remove(e);
-		unuseEnemy.remove(e);
+		it = unuseEnemy.erase(it);
 	}
 }
 
@@ -85,22 +89,28 @@ void EnemyManager::Render() {
 		if (e == nullptr) continue;
 		e->Render();
 	}
-
 }
 
 void EnemyManager::SpawnEnemy(EnemyType type, VECTOR pos) {
-	Enemy* e = nullptr;
+	// 1. インスタンス取得
+	Enemy* e = UseEnemy(type);
+	if (!e) return;
 
-	e = UseEnemy(type);
-
-	if (e == nullptr) 
-		return;
+	// 2. データを注入（Setupより先に呼ぶことで、データに基づいた初期化を可能にする）
+	EnemyData* data = GetEnemyData(static_cast<int>(type));
+	if (data) {
+		e->InitializeData(data);
+	}
+	else {
+		OutputDebugStringA("EnemyManager: Warning! No Data for current EnemyType.\n");
+	}
 
 	pEnemyArray.push_back(e);
-
 	e->SetPosition(pos);
-}
 
+	// 3. データがセットされた状態で最終セットアップ
+	e->Setup();
+}
 
 void EnemyManager::SpawnBoss(EnemyType type, VECTOR pos) {
 	BossBase* boss = nullptr;
@@ -123,83 +133,95 @@ void EnemyManager::SpawnBoss(EnemyType type, VECTOR pos) {
 	default:
 		return;
 	}
-	boss->SetPosition(VGet(pos.x * CellSize, 0, pos.z * CellSize));
-	boss->SetVisible(true);
-	boss->SetType(type);
-	pEnemyArray.push_back(boss);
+	if (boss) {
+		boss->SetPosition(VGet(pos.x * CellSize, 0, pos.z * CellSize));
+		boss->SetVisible(true);
+		boss->SetType(type);
+		pEnemyArray.push_back(boss);
+	}
 }
 
 Enemy* EnemyManager::UseEnemy(EnemyType type) {
-	Enemy* e = nullptr;
+	int index = static_cast<int>(type);
 
-	// 指定の敵の未使用が無ければ
-	if (pUnuseEnemiesArray[(int)type]->unuseArray.size() == 0) {
-		// 敵の生成
-		e = pUnuseEnemiesArray[(int)type]->CreateEnemy();
+	// ★重要：範囲外アクセスをガード（これが Assertion Failed の直接の対策）
+	if (index < 0 || index >= (int)pUnuseEnemiesArray.size()) {
+		OutputDebugStringA("EnemyManager: UseEnemy Error - Index out of range for pUnuseEnemiesArray.\n");
+		return nullptr;
+	}
+
+	Enemy* e = nullptr;
+	if (pUnuseEnemiesArray[index]->unuseArray.size() == 0) {
+		e = pUnuseEnemiesArray[index]->CreateEnemy();
 	}
 	else {
-		e = pUnuseEnemiesArray[(int)type]->unuseArray.front();
-		pUnuseEnemiesArray[(int)type]->unuseArray.pop_front();
+		e = pUnuseEnemiesArray[index]->unuseArray.front();
+		pUnuseEnemiesArray[index]->unuseArray.pop_front();
 	}
 
-	e->SetType(type);
-	e->Setup();
+	if (e) {
+		e->SetType(type);
+		// ここでは Setup() は呼ばない。SpawnEnemy でデータ注入後に呼ぶ。
+	}
 	return e;
 }
 
 void EnemyManager::UnuseEnemy(Enemy* enemy) {
-	// 未使用状態化
+	if (!enemy) return;
 	enemy->Teardown();
 
-	pUnuseEnemiesArray[(int)enemy->GetType()]->unuseArray.push_back(enemy);
+	int typeIdx = static_cast<int>(enemy->GetType());
+	if (typeIdx >= 0 && typeIdx < (int)pUnuseEnemiesArray.size()) {
+		pUnuseEnemiesArray[typeIdx]->unuseArray.push_back(enemy);
+	}
 
 	unuseEnemy.push_back(enemy);
 }
 
 void EnemyManager::UnuseAllEnemy() {
-
 	while (pEnemyArray.size() > 0) {
 		Enemy* e = pEnemyArray.front();
 		if (e->IsBoss()) {
 			pEnemyArray.remove(e);
 			DeleteEnemy(e);
-			return;
 		}
-
-		e->Teardown();
-		pUnuseEnemiesArray[(int)e->GetType()]->unuseArray.push_back(e);
-		pEnemyArray.remove(e);
+		else {
+			e->Teardown();
+			int typeIdx = static_cast<int>(e->GetType());
+			if (typeIdx >= 0 && typeIdx < (int)pUnuseEnemiesArray.size()) {
+				pUnuseEnemiesArray[typeIdx]->unuseArray.push_back(e);
+			}
+			pEnemyArray.remove(e);
+		}
 	}
 }
 
 void EnemyManager::DeleteEnemy(Enemy* enemy) {
+	if (!enemy) return;
 	CollisionManager::GetInstance().UnRegister(enemy->GetCollider());
 	unuseEnemy.push_back(enemy);
 	delete enemy;
-	enemy = nullptr;
 }
 
 void EnemyManager::DeleteAllEnemy() {
 	for (auto e : pEnemyArray) {
-		pEnemyArray.remove(e);
-		if (e == nullptr) continue;
-		delete e;
-		e = nullptr;
+		if (e) delete e;
 	}
-
 	pEnemyArray.clear();
 
 	for (auto list : pUnuseEnemiesArray) {
-		list->DeleteAllEnemy();
+		if (list) {
+			list->DeleteAllEnemy();
+			delete list;
+		}
 	}
+	pUnuseEnemiesArray.clear();
 }
 
 void EnemyManager::SaveTo(BinaryWriter& w) {
-	// active 敵数
 	uint32_t count = static_cast<uint32_t>(pEnemyArray.size());
 	w.WritePOD(count);
 	for (auto e : pEnemyArray) {
-		// 必要な getter を Enemy 側で用意しておくこと（GetType, GetPosition, GetRotationY, GetHP, IsDead）
 		uint32_t type = static_cast<uint32_t>(e->GetType());
 		w.WritePOD(type);
 
@@ -208,7 +230,6 @@ void EnemyManager::SaveTo(BinaryWriter& w) {
 		w.WritePOD(pos.y);
 		w.WritePOD(pos.z);
 
-		// 追加: 回転（Y）を保存（LoadFrom が期待している順序に合わせる）
 		float rotY = e->GetRotationY();
 		w.WritePOD(rotY);
 
@@ -221,7 +242,6 @@ void EnemyManager::SaveTo(BinaryWriter& w) {
 }
 
 void EnemyManager::LoadFrom(BinaryReader& r, uint32_t ver) {
-	// 既存の敵を一旦クリアする
 	UnuseAllEnemy();
 	DeleteAllEnemy();
 
@@ -243,23 +263,103 @@ void EnemyManager::LoadFrom(BinaryReader& r, uint32_t ver) {
 		uint8_t dead;
 		r.ReadPOD(dead);
 
-		// UseEnemy でプールから取り出して pEnemyArray に push される（UseEnemy が内部で Setup/SetVisible を行う）
 		Enemy* e = UseEnemy(static_cast<EnemyType>(type));
 		if (!e) continue;
 
 		e->SetPosition(VGet(x, y, z));
-
-		// 追加: 回転の復元
 		e->SetRotationY(rotY);
-
-		e->SetHP(hp); // Enemy 側で実装
+		e->SetHP(hp);
 
 		if (dead) {
-			e->SetDeadState(true); // ダメージ配布や経験値付与を発生させない専用処理を作ること
+			e->SetDeadState(true);
 			e->SetVisible(false);
-			// 衝突判定なども適切に解除する（必要なら）
 			CollisionManager::GetInstance().UnRegister(e->GetCollider());
 		}
 	}
 }
 
+void EnemyManager::LoadEnemyData() {
+	enemyTable.clear();
+	const std::string jsonPath = "Src/Data/EnemyData.json";
+	const std::string datPath = "Src/Data/EnemyData.dat";
+
+	// フォルダ作成
+	try { std::filesystem::create_directories("Src/Data"); }
+	catch (...) {}
+
+	std::ifstream jsonFile(jsonPath);
+	if (jsonFile.is_open()) {
+		// --- 【開発モード】JSONから読み込み ---
+		nlohmann::json data;
+		try {
+			jsonFile >> data;
+			for (auto& e : data) {
+				if (!e.contains("id")) continue;
+				::EnemyData tempData;
+				tempData.id = e["id"];
+				tempData.typeID = e.value("typeID", 0);
+				tempData.name = e.value("name", "Unknown");
+				tempData.mPath = e.value("mPath", "");
+				tempData.hp = e.value("hp", 100);
+				tempData.atk = e.value("atk", 10);
+				tempData.def = e.value("def", 5);
+				tempData.exp = e.value("exp", 0);
+				tempData.spd = e.value("spd", 1.0f);
+				tempData.cRate = e.value("cRate", 0.05f);
+				tempData.cDamageRate = e.value("cDamageRate", 1.5f);
+				tempData.rAngle = e.value("rAngle", 0.0f);
+				tempData.rCount = e.value("rCount", 0);
+				tempData.rLenght = e.value("rLenght", 0.0f);
+				enemyTable[tempData.id] = tempData;
+			}
+			// DATを更新保存
+			std::ofstream outFile(datPath, std::ios::binary);
+			if (outFile.is_open()) {
+				msgpack::pack(outFile, enemyTable);
+				OutputDebugStringA("EnemyManager: DAT updated from JSON.\n");
+			}
+		}
+		catch (...) { OutputDebugStringA("EnemyManager: JSON Parse Error!\n"); }
+	}
+	else {
+		// --- 【製品モード】DATから読み込み ---
+		std::ifstream datFile(datPath, std::ios::binary);
+		if (datFile.is_open()) {
+			// ファイルサイズを確認
+			datFile.seekg(0, std::ios::end);
+			size_t size = datFile.tellg();
+			datFile.seekg(0, std::ios::beg);
+
+			if (size > 0) {
+				std::vector<char> buffer(size);
+				datFile.read(buffer.data(), size);
+				try {
+					// msgpackのデシリアライズを明示的に行う
+					msgpack::object_handle oh = msgpack::unpack(buffer.data(), buffer.size());
+					oh.get().convert(enemyTable);
+
+					// ★確認用：中身が空なら叫ぶ
+					if (enemyTable.empty()) {
+						OutputDebugStringA("EnemyManager: DAT was empty after unpack!\n");
+					}
+					else {
+						OutputDebugStringA("EnemyManager: DAT loaded successfully.\n");
+					}
+				}
+				catch (...) {
+					OutputDebugStringA("EnemyManager: DAT unpack FAILED (Structure mismatch).\n");
+				}
+			}
+		}
+		else {
+			OutputDebugStringA("EnemyManager: CRITICAL - JSON and DAT both missing!\n");
+		}
+	}
+}
+EnemyData* EnemyManager::GetEnemyData(int id) {
+	auto it = enemyTable.find(id);
+	if (it != enemyTable.end()) {
+		return &(it->second);
+	}
+	return nullptr;
+}

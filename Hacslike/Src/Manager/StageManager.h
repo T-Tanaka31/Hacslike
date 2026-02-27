@@ -16,10 +16,10 @@ struct FloorData {
 	std::string bgmName;
 };
 
-struct EnemyData {
-	int id;
-	int typeID;
-};
+//struct EnemyData {
+//	int id;
+//	int typeID;
+//};
 
 class StageManager :public Singleton<StageManager>{
 #pragma region シングルトンのデータ構造

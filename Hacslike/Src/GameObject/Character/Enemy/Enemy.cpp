@@ -1,4 +1,5 @@
 #include <iostream>
+#include "../../../Manager/EnemyManager.h"
 #include "Enemy.h"
 #include "../../../Manager/TimeManager.h"
 #include "../../../Manager/CollisionManager.h"
@@ -194,27 +195,29 @@ void Enemy::Render() {
 }
 
 
-
 void Enemy::SetStatusData(int enemyID) {
-	auto enemies = LoadJsonFile("Src/Data/EnemyData.json");
+	// クラス名がついた Manager から GetEnemyData を呼ぶ
+	// 戻り値を auto ではなく、あえて明示的に書く
+	::EnemyData* data = EnemyManager::GetInstance().GetEnemyData(enemyID);
 
-	for (auto e : enemies) {
+	if (data != nullptr) {
+		// ここで data->hp が赤くなるなら、data の型が「EnemyManager.h の EnemyData」になっていません
+		this->maxHp = (float)data->hp;
+		this->hp = this->maxHp;
+		this->atk = (float)data->atk;
+		this->def = (float)data->def;
+		this->exp = data->exp;
+		this->name = data->name;
+		this->moveSpeed = data->spd;
+		this->mPath = data->mPath;
 
-		if (e["id"] != enemyID) continue;
+		// 視界（Enemy.h で定義した struct Ray_Fan vision への代入）
+		this->vision.rayAngle = data->rAngle;
+		this->vision.rayCount = data->rCount;
+		this->vision.rayLenght = data->rLenght;
 
-		maxHp = e["hp"];
-		atk = e["atk"];
-		def = e["def"];
-		exp = e["exp"];
-		name = e["name"];
-		moveSpeed = e["spd"];
-		mPath = e["mPath"];
-		criticalHitRate = e["cRate"];
-		criticalDamage = e["cDamageRate"];
-		vision.rayAngle = e["rAngle"];
-		vision.rayCount = e["rCount"];
-		vision.rayLenght = e["rLenght"];
-		break;
+		this->criticalHitRate = data->cRate;
+		this->criticalDamage = data->cDamageRate;
 	}
 
 	LoadAnimation();

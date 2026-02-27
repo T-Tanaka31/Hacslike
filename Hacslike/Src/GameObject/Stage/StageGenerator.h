@@ -4,6 +4,7 @@
 #include <list>
 #include "../../CommonModule.h"
 #include"../../Manager/SaveManager.h"
+#include <msgpack.hpp>
 
 
 class StageCell;
@@ -14,6 +15,37 @@ class StartTreasureChest;
 class EnhancementStone;
 class TitleReturner;
 class ItemShop;
+
+namespace msgpack {
+	MSGPACK_API_VERSION_NAMESPACE(MSGPACK_DEFAULT_API_NS) {
+		namespace adaptor {
+			template<>
+			struct convert<VECTOR> {
+				msgpack::object const& operator()(msgpack::object const& o, VECTOR& v) const {
+					if (o.type != msgpack::type::ARRAY || o.via.array.size != 3) {
+						throw msgpack::type_error();
+					}
+					v.x = o.via.array.ptr[0].as<float>();
+					v.y = o.via.array.ptr[1].as<float>();
+					v.z = o.via.array.ptr[2].as<float>();
+					return o;
+				}
+			};
+
+			template<>
+			struct pack<VECTOR> {
+				template <typename Stream>
+				msgpack::packer<Stream>& operator()(msgpack::packer<Stream>& o, VECTOR const& v) const {
+					o.pack_array(3);
+					o.pack(v.x);
+					o.pack(v.y);
+					o.pack(v.z);
+					return o;
+				}
+			};
+		}
+	}
+}
 
 struct StageData {
 	int id;
@@ -29,6 +61,18 @@ struct StageData {
 	std::vector<VECTOR> closePosArray;
 	int bossType;
 	std::string bgmName;
+
+	//	Msgpack—p
+	MSGPACK_DEFINE(id, stageData,
+		playerSpawnPos.x, playerSpawnPos.y, playerSpawnPos.z,
+		saveObjectPos.x, saveObjectPos.y, saveObjectPos.z,
+		chestObjectPos.x, chestObjectPos.y, chestObjectPos.z,
+		enhancementStonePos.x, enhancementStonePos.y, enhancementStonePos.z,
+		itemShopPos.x, itemShopPos.y, itemShopPos.z,
+		bossSpawnPos.x, bossSpawnPos.y, bossSpawnPos.z,
+		stairSpawnPos.x, stairSpawnPos.y, stairSpawnPos.z,
+		returnerSpawnPos.x, returnerSpawnPos.y, returnerSpawnPos.z,
+		closePosArray, bossType, bgmName);
 };
 
 class StageGenerator {
@@ -52,6 +96,8 @@ public:
 	VECTOR mapOffset;
 
 	StageData stage;
+
+	std::unordered_map<int, StageData> stageCache;
 
 public:
 	

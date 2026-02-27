@@ -1,11 +1,40 @@
 #pragma once
 #include "../Component/Singleton.h"
 #include <vector>
+#include <list>          // listも使っているので追加
+#include <string>        // stringを使っているので追加
+#include <unordered_map> // これが最重要
+#include <fstream>
 #include "../Definition.h"
 #include"../Manager/SaveManager.h"
 #include <functional>
+#include <msgpack.hpp>
+#include "../Data/json.hpp"
+
 
 class Enemy;
+
+struct EnemyData {
+	int id;
+	int typeID;
+	std::string name;
+	std::string mPath; // モデルパス
+	int hp;
+	int atk;
+	int def;
+	int exp;
+	float spd;
+	float cRate;
+	float cDamageRate;
+
+	// 視界（Vision）関連
+	float rAngle;
+	int rCount;
+	float rLenght;
+
+	// Msgpackで保存・復元する項目
+	MSGPACK_DEFINE(id, typeID, name, mPath, hp, atk, def, exp, spd, cRate, cDamageRate, rAngle, rCount, rLenght);
+};
 
 struct EnemyUtility {
 	std::list<Enemy*> unuseArray;
@@ -76,6 +105,8 @@ private:
 	EnemyUtility* durahan;
 	EnemyUtility* hobgoblin;
 
+	std::unordered_map<int, EnemyData> enemyTable;
+
 public:
 	EnemyManager();
 	~EnemyManager();
@@ -98,5 +129,9 @@ public:
 	void LoadFrom(BinaryReader& r, uint32_t ver);
 	void AddKillCount() { killEnemyCount++; }
 	int GetKillCount() { return killEnemyCount; }
+
+	void LoadEnemyData();
+
+	EnemyData* GetEnemyData(int id);
 };
 
