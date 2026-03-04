@@ -71,40 +71,151 @@ void StageManager::DrawMap() {
 }
 
 void StageManager::LoadFloorData() {
-	auto data = LoadJsonFile("Src/Data/FloorData.json");
+	const std::string jsonPath = "Src/Data/FloorData.json";
+	const std::string datPath = "Src/Data/FloorData.dat";
 
-	for (auto d : data) {
-		if (d["startFloor"] - 1 != floorCount) continue;
+	// フォルダの自動作成
+	try { std::filesystem::create_directories("Src/Data"); }
+	catch (...) {}
 
-		floorData.startFloor = d["startFloor"];
-		floorData.endFloor = d["endFloor"];
+	std::ifstream jsonFile(jsonPath);
 
-		// ベクターの初期化
-		floorData.spawnEnemyID.clear();
-		floorData.spawnEnemyID.shrink_to_fit();
-
-		floorData.bgmName = d["floorBGMName"];
-
-		for (int id : d["spawnEnemyID"]) {
-			floorData.spawnEnemyID.push_back(id);
+	if (jsonFile.is_open()) {
+		// ==========================================
+		// 【開発モード】JSONから読み込み
+		// ==========================================
+		nlohmann::json data;
+		try {
+			jsonFile >> data;
 		}
-		break;
+		catch (const nlohmann::json::parse_error& e) {
+			return;
+		}
+
+		// マップをリセット
+		FloorTable.clear();
+
+		for (auto& d : data) {
+			// startFloor をキーとして使用
+			if (!d.contains("startFloor")) continue;
+			int id = d["startFloor"].get<int>();
+
+			FloorData temp;
+			temp.startFloor = id;
+			temp.endFloor = d.value("endFloor", id);
+			temp.bgmName = d.value("floorBGMName", "DefaultBGM");
+
+			// 敵IDリストの読み込み
+			if (d.contains("spawnEnemyID") && d["spawnEnemyID"].is_array()) {
+				for (int enemyId : d["spawnEnemyID"]) {
+					temp.spawnEnemyID.push_back(enemyId);
+				}
+			}
+
+			// 格納
+			FloorTable[id] = temp;
+
+			// 現在の階層データ
+			if (id - 1 == floorCount) {
+				this->floorData = temp;
+			}
+		}
+
+		// --- FloorData.dat として保存 ---
+		std::ofstream outFile(datPath, std::ios::binary);
+		if (outFile.is_open()) {
+			msgpack::pack(outFile, FloorTable);
+			outFile.close();
+		}
+	}
+	else {
+		// ==========================================
+		// 【製品モード】バイナリ(.dat)から読み込み
+		// ==========================================
+		std::ifstream datFile(datPath, std::ios::binary);
+		if (!datFile.is_open()) return;
+
+		std::vector<char> buffer((std::istreambuf_iterator<char>(datFile)), std::istreambuf_iterator<char>());
+		datFile.close();
+
+		if (buffer.empty()) return;
+
+		try {
+			auto oh = msgpack::unpack(buffer.data(), buffer.size());
+			oh.get().convert(FloorTable);
+
+			// ロードしたテーブルから現在の階層データを抽出
+			if (FloorTable.count(floorCount + 1)) {
+				this->floorData = FloorTable[floorCount + 1];
+			}
+		}
+		catch (...) {}
 	}
 }
 
 void StageManager::LoadFloorTexture() {
-	auto data = LoadJsonFile("Src/data/FloorData.json");
+	const std::string jsonPath = "Src/Data/FloorData.json";
+	const std::string datPath = "Src/Data/FloorTexture.dat"; // 専用のdatファイルに分けると管理が楽です
+
+	// 読み込むデータの器（MessagePack用）
+	// JSONの各要素から必要な文字列だけを抽出する構造
+	std::vector<std::string> textureNames;
+
+	std::ifstream jsonFile(jsonPath);
+	if (jsonFile.is_open()) {
+		nlohmann::json jData;
+		try {
+			jsonFile >> jData;
+			if (jData.is_array()) {
+				for (auto& d : jData) {
+					if (d.contains("floorTextureName")) {
+						textureNames.push_back(d["floorTextureName"].get<std::string>());
+					}
+				}
+			}
+			// 次回のためにバイナリ保存
+			std::ofstream outFile(datPath, std::ios::binary);
+			if (outFile.is_open()) {
+				msgpack::pack(outFile, textureNames);
+			}
+		}
+		catch (...) {}
+	}
+	else {
+		// JSONがないので .dat から名前リストを復元
+		std::ifstream datFile(datPath, std::ios::binary);
+		if (datFile.is_open()) {
+			std::vector<char> buffer((std::istreambuf_iterator<char>(datFile)), std::istreambuf_iterator<char>());
+			if (!buffer.empty()) {
+				try {
+					auto oh = msgpack::unpack(buffer.data(), buffer.size());
+					oh.get().convert(textureNames);
+				}
+				catch (...) {}
+			}
+		}
+	}
+
+	// --- ここから実際のロード処理 ---
+	// textureNames が空なら何もしない（クラッシュ防止）
+	if (textureNames.empty()) return;
 
 	std::string floorTag = "f";
 	std::string wallTag = "w";
 	std::string normalTag = "n";
 	std::string pngTag = ".png";
 
-	for (auto d : data) {
-		std::string floorDiv = MergeString(TEXTURE_FILEPATH, d["floorTextureName"], floorTag, pngTag);
-		std::string floorNml = MergeString(TEXTURE_FILEPATH, d["floorTextureName"], floorTag, normalTag, pngTag);
-		std::string wallDiv = MergeString(TEXTURE_FILEPATH, d["floorTextureName"], wallTag, pngTag);
-		std::string wallNml = MergeString(TEXTURE_FILEPATH, d["floorTextureName"], wallTag, normalTag, pngTag);
+	// 既存のテクスチャを一旦クリア（二重ロード防止）
+	floorDifTexture.clear();
+	floorNormalTexture.clear();
+	wallDifTexture.clear();
+	wallNormalTexture.clear();
+
+	for (const auto& name : textureNames) {
+		std::string floorDiv = MergeString(TEXTURE_FILEPATH, name, floorTag, pngTag);
+		std::string floorNml = MergeString(TEXTURE_FILEPATH, name, floorTag, normalTag, pngTag);
+		std::string wallDiv = MergeString(TEXTURE_FILEPATH, name, wallTag, pngTag);
+		std::string wallNml = MergeString(TEXTURE_FILEPATH, name, wallTag, normalTag, pngTag);
 
 		floorDifTexture.push_back(LoadGraph(floorDiv.c_str()));
 		floorNormalTexture.push_back(LoadGraph(floorNml.c_str()));
@@ -162,47 +273,42 @@ void StageManager::GenerateStage() {
 
 		canSpawnNum += w * h;
 	}
+
 	// 敵の数を決める
-	int spawnNum = Random(std::floor(canSpawnNum / 10), std::floor(canSpawnNum / 3));
-
-	if (spawnNum > EnemyMax) spawnNum = EnemyMax;
-
-	// 敵データを読み込む
-	auto data = LoadJsonFile("Src/Data/EnemyData.json");
-
 	int max = floorData.spawnEnemyID.size();
-
 	if (max == 0) return;
 
 	std::vector<EnemyData> spawnEnemyDataList;
 
-	// スポーンする可能性のある敵のデータを取得しておく
+	// EnemyManagerから正規のデータを取得
 	for (int i = 0; i < max; i++) {
-		for (auto d : data) {
-			if (d["id"] != floorData.spawnEnemyID[i]) continue;
-
-			EnemyData eData;
-			eData.id = d["id"];
-			eData.typeID = d["typeID"];
-
-			spawnEnemyDataList.push_back(eData);
-			break;
+		EnemyData* pData = EnemyManager::GetInstance().GetEnemyData(floorData.spawnEnemyID[i]);
+		if (pData != nullptr) {
+			spawnEnemyDataList.push_back(*pData);
 		}
 	}
+
+	// ★重要：ここが「描画されない」を防ぐ生命線
+	if (spawnEnemyDataList.empty()) {
+		OutputDebugStringA("Error: EnemyManager has NO DATA. Skipping spawn.\n");
+		return; // データがなければここで安全に終了。これでRenderまで処理が回る。
+	}
+
+	// 敵の数を決定（spawnNum は適宜計算）
+	int spawnNum = Random(std::floor(canSpawnNum / 10), std::floor(canSpawnNum / 3));
+	if (spawnNum > EnemyMax) spawnNum = EnemyMax;
 
 	for (int i = 0; i < spawnNum; i++) {
-		int spawnEnemyID = spawnEnemyDataList[Random(0, spawnEnemyDataList.size() - 1)].id;
+		// 安全になったRandom
+		int index = Random(0, (int)spawnEnemyDataList.size() - 1);
+		EnemyData& targetData = spawnEnemyDataList[index];
 
-		for (auto e : spawnEnemyDataList) {
-			if (e.id != spawnEnemyID) continue;
-
-			EnemyManager::GetInstance().SpawnEnemy((EnemyType)e.typeID, GetRandomRoomRandomPos());
-			break;
-		}
-
+		// スポーン実行
+		EnemyManager::GetInstance().SpawnEnemy((EnemyType)targetData.typeID, GetRandomRoomRandomPos());
 	}
 
-	AudioManager::GetInstance().LoadPlay("Res/Audio/BGM/MainGame/Floor/" + floorData.bgmName + +".mp3", floorData.bgmName, false);
+	// BGM再生
+	AudioManager::GetInstance().LoadPlay("Res/Audio/BGM/MainGame/Floor/" + floorData.bgmName + ".mp3", floorData.bgmName, false);
 }
 
 void StageManager::GenerateStage(int stageID) {

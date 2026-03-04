@@ -7,7 +7,7 @@ void AttackArea::CreateArea(float _rad, float _time, VECTOR pos,float speed, std
 void AttackArea::Update() {
 	if (areaObjectArray.size() == 0 || owner == nullptr) return;
 
-	std::list<AttackAreaObject<void>*> deleteArray;
+	std::list<AttackAreaObject*> deleteArray;
 
 	for (auto a : areaObjectArray) {
 		if (a == nullptr) continue;

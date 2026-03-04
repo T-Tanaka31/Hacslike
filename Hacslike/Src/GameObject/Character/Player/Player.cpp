@@ -632,7 +632,7 @@ void Player::WeaponInput() {
 void Player::AddItem() {
 	if (!hitItem) return;
 
-	if (input->IsKeyDown(KEY_INPUT_F) || input->IsButtonDown(XINPUT_GAMEPAD_B)) {
+	//if (input->IsKeyDown(KEY_INPUT_F) || input->IsButtonDown(XINPUT_GAMEPAD_B)) {
 
 		hitItem->SetVisible(false);
 
@@ -643,7 +643,7 @@ void Player::AddItem() {
 		ItemDropManager::GetInstance().RemoveItem(hitItem);
 
 		hitItem = nullptr; // 念のため解除
-	}
+	//}
 }
 
 void Player::OpenMenu() {

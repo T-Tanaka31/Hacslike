@@ -63,16 +63,21 @@ struct StageData {
 	std::string bgmName;
 
 	//	Msgpack—p
-	MSGPACK_DEFINE(id, stageData,
-		playerSpawnPos.x, playerSpawnPos.y, playerSpawnPos.z,
-		saveObjectPos.x, saveObjectPos.y, saveObjectPos.z,
-		chestObjectPos.x, chestObjectPos.y, chestObjectPos.z,
-		enhancementStonePos.x, enhancementStonePos.y, enhancementStonePos.z,
-		itemShopPos.x, itemShopPos.y, itemShopPos.z,
-		bossSpawnPos.x, bossSpawnPos.y, bossSpawnPos.z,
-		stairSpawnPos.x, stairSpawnPos.y, stairSpawnPos.z,
-		returnerSpawnPos.x, returnerSpawnPos.y, returnerSpawnPos.z,
-		closePosArray, bossType, bgmName);
+	MSGPACK_DEFINE(
+		id,
+		stageData,
+		playerSpawnPos,
+		saveObjectPos,
+		chestObjectPos,
+		enhancementStonePos,
+		itemShopPos,
+		bossSpawnPos,
+		stairSpawnPos,
+		returnerSpawnPos,
+		closePosArray,
+		bossType,
+		bgmName
+	);
 };
 
 class StageGenerator {

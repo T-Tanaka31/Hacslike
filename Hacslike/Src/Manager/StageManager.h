@@ -6,6 +6,7 @@
 
 #include "EnemyManager.h"
 #include <vector>
+#include <msgpack.hpp>
 
 
 
@@ -14,6 +15,8 @@ struct FloorData {
 	int endFloor;
 	std::vector<int> spawnEnemyID;
 	std::string bgmName;
+
+	MSGPACK_DEFINE(startFloor, endFloor, spawnEnemyID, bgmName);
 };
 
 //struct EnemyData {
@@ -51,6 +54,8 @@ public:
 	bool isLoadBossSpawn = false;
 
 	const std::string TEXTURE_FILEPATH = "Res/Model/Stage/Texture/";
+
+	std::unordered_map<int, FloorData> FloorTable;
 
 	// SaveObject ‚ğ StageManager ‚ªŠ—L‚µ‚Ä Update/Render ‚ğŒÄ‚Ô
 	

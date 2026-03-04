@@ -633,10 +633,10 @@ void StageGenerator::LoadStageData(int stageID) {
 						// unpackの戻り値を直接使わず、一旦 handle で受ける
 						auto handle = msgpack::unpack(buffer.data(), buffer.size());
 						handle.get().convert(stageCache);
-						printfDx("Msgpack(Stage)のロードに成功しました。\n");
+						//printfDx("Msgpack(Stage)のロードに成功しました。\n");
 					}
 					catch (const std::exception& e) {
-						printfDx("Msgpack Load Error: %s\n", e.what());
+						//printfDx("Msgpack Load Error: %s\n", e.what());
 					}
 				}
 			}

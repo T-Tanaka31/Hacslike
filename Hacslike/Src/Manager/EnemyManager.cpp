@@ -1,4 +1,4 @@
-#include "EnemyManager.h"
+ï»¿#include "EnemyManager.h"
 #include "../GameObject/Character/Enemy/Goblin/EnemyGoblin.h"
 #include "../GameObject/Character/Enemy/Spider/EnemySpider.h"
 #include "../GameObject/Character/Enemy/Wolf/EnemyWolf.h"
@@ -18,8 +18,10 @@
 #include "../GameObject/Character/Enemy/Boss/Durahan/BossDurahan.h"
 #include "../Manager/AudioManager.h"
 #include "../Save/SaveIO.h"
+#include <filesystem>
 
 EnemyManager::EnemyManager() {
+	LoadEnemyData();
 	Start();
 }
 
@@ -28,10 +30,7 @@ EnemyManager::~EnemyManager() {
 }
 
 void EnemyManager::Start() {
-	// 1. ƒf[ƒ^‚Ìƒ[ƒhiWeaponManager‚ÆİŒv‚ğ“ˆêj
-	LoadEnemyData();
-
-	// 2. ‰¹ºƒŠƒ\[ƒX‚Ìƒ[ƒh
+	// 2. éŸ³å£°ãƒªã‚½ãƒ¼ã‚¹ã®ãƒ­ãƒ¼ãƒ‰
 	AudioManager* manager = &AudioManager::GetInstance();
 	manager->Load(audioFilePath + "SwordSwing.mp3", "SwordSwing", false);
 	manager->Load(audioFilePath + "Impact.mp3", "Impact", false);
@@ -44,7 +43,7 @@ void EnemyManager::Start() {
 	manager->Load(audioFilePath + "Punch2.mp3", "Punch2", false);
 	manager->Load(audioFilePath + "HeadBang.mp3", "HeadBang", false);
 
-	// 3. ŠeƒGƒlƒ~[‚Ì¶¬—pƒ†[ƒeƒBƒŠƒeƒB‚ğ‰Šú‰»
+	// 3. å„ã‚¨ãƒãƒŸãƒ¼ã®ç”Ÿæˆç”¨ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚’åˆæœŸåŒ–
 	goblin = new EnemyUtility([this]() {return new EnemyGoblin(MV1DuplicateModel(goblin->originModelHandle)); }, MV1LoadModel("Res/Model/Enemy/Goblin/model.mv1"));
 	spider = new EnemyUtility([this]() {return new EnemySpider(MV1DuplicateModel(spider->originModelHandle)); }, MV1LoadModel("Res/Model/Enemy/Spider/model.mv1"));
 	wolf = new EnemyUtility([this]() {return new EnemyWolf(MV1DuplicateModel(wolf->originModelHandle)); }, MV1LoadModel("Res/Model/Enemy/Wolf/model.mv1"));
@@ -76,7 +75,7 @@ void EnemyManager::Update() {
 		e->Update();
 	}
 
-	// –¢g—pƒŠƒXƒg‚Ö‚ÌˆÚ“®ˆ—
+	// æœªä½¿ç”¨ãƒªã‚¹ãƒˆã¸ã®ç§»å‹•å‡¦ç†
 	for (auto it = unuseEnemy.begin(); it != unuseEnemy.end(); ) {
 		Enemy* e = *it;
 		pEnemyArray.remove(e);
@@ -92,11 +91,11 @@ void EnemyManager::Render() {
 }
 
 void EnemyManager::SpawnEnemy(EnemyType type, VECTOR pos) {
-	// 1. ƒCƒ“ƒXƒ^ƒ“ƒXæ“¾
+	// 1. ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å–å¾—
 	Enemy* e = UseEnemy(type);
 	if (!e) return;
 
-	// 2. ƒf[ƒ^‚ğ’“üiSetup‚æ‚èæ‚ÉŒÄ‚Ô‚±‚Æ‚ÅAƒf[ƒ^‚ÉŠî‚Ã‚¢‚½‰Šú‰»‚ğ‰Â”\‚É‚·‚éj
+	// 2. ãƒ‡ãƒ¼ã‚¿ã‚’æ³¨å…¥ï¼ˆSetupã‚ˆã‚Šå…ˆã«å‘¼ã¶ã“ã¨ã§ã€ãƒ‡ãƒ¼ã‚¿ã«åŸºã¥ã„ãŸåˆæœŸåŒ–ã‚’å¯èƒ½ã«ã™ã‚‹ï¼‰
 	EnemyData* data = GetEnemyData(static_cast<int>(type));
 	if (data) {
 		e->InitializeData(data);
@@ -108,7 +107,7 @@ void EnemyManager::SpawnEnemy(EnemyType type, VECTOR pos) {
 	pEnemyArray.push_back(e);
 	e->SetPosition(pos);
 
-	// 3. ƒf[ƒ^‚ªƒZƒbƒg‚³‚ê‚½ó‘Ô‚ÅÅIƒZƒbƒgƒAƒbƒv
+	// 3. ãƒ‡ãƒ¼ã‚¿ãŒã‚»ãƒƒãƒˆã•ã‚ŒãŸçŠ¶æ…‹ã§æœ€çµ‚ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
 	e->Setup();
 }
 
@@ -144,7 +143,7 @@ void EnemyManager::SpawnBoss(EnemyType type, VECTOR pos) {
 Enemy* EnemyManager::UseEnemy(EnemyType type) {
 	int index = static_cast<int>(type);
 
-	// šd—vF”ÍˆÍŠOƒAƒNƒZƒX‚ğƒK[ƒhi‚±‚ê‚ª Assertion Failed ‚Ì’¼Ú‚Ì‘Îôj
+	// â˜…é‡è¦ï¼šç¯„å›²å¤–ã‚¢ã‚¯ã‚»ã‚¹ã‚’ã‚¬ãƒ¼ãƒ‰ï¼ˆã“ã‚ŒãŒ Assertion Failed ã®ç›´æ¥ã®å¯¾ç­–ï¼‰
 	if (index < 0 || index >= (int)pUnuseEnemiesArray.size()) {
 		OutputDebugStringA("EnemyManager: UseEnemy Error - Index out of range for pUnuseEnemiesArray.\n");
 		return nullptr;
@@ -161,7 +160,7 @@ Enemy* EnemyManager::UseEnemy(EnemyType type) {
 
 	if (e) {
 		e->SetType(type);
-		// ‚±‚±‚Å‚Í Setup() ‚ÍŒÄ‚Î‚È‚¢BSpawnEnemy ‚Åƒf[ƒ^’“üŒã‚ÉŒÄ‚ÔB
+		// ã“ã“ã§ã¯ Setup() ã¯å‘¼ã°ãªã„ã€‚SpawnEnemy ã§ãƒ‡ãƒ¼ã‚¿æ³¨å…¥å¾Œã«å‘¼ã¶ã€‚
 	}
 	return e;
 }
@@ -197,25 +196,25 @@ void EnemyManager::UnuseAllEnemy() {
 }
 
 void EnemyManager::DeleteEnemy(Enemy* enemy) {
-	if (!enemy) return;
 	CollisionManager::GetInstance().UnRegister(enemy->GetCollider());
 	unuseEnemy.push_back(enemy);
 	delete enemy;
+	enemy = nullptr;
 }
 
 void EnemyManager::DeleteAllEnemy() {
 	for (auto e : pEnemyArray) {
-		if (e) delete e;
+		pEnemyArray.remove(e);
+		if (e == nullptr) continue;
+		delete e;
+		e = nullptr;
 	}
+
 	pEnemyArray.clear();
 
 	for (auto list : pUnuseEnemiesArray) {
-		if (list) {
-			list->DeleteAllEnemy();
-			delete list;
-		}
+		list->DeleteAllEnemy();
 	}
-	pUnuseEnemiesArray.clear();
 }
 
 void EnemyManager::SaveTo(BinaryWriter& w) {
@@ -243,7 +242,7 @@ void EnemyManager::SaveTo(BinaryWriter& w) {
 
 void EnemyManager::LoadFrom(BinaryReader& r, uint32_t ver) {
 	UnuseAllEnemy();
-	DeleteAllEnemy();
+	//DeleteAllEnemy();
 
 	uint32_t count = 0;
 	r.ReadPOD(count);
@@ -280,86 +279,149 @@ void EnemyManager::LoadFrom(BinaryReader& r, uint32_t ver) {
 
 void EnemyManager::LoadEnemyData() {
 	enemyTable.clear();
+
 	const std::string jsonPath = "Src/Data/EnemyData.json";
 	const std::string datPath = "Src/Data/EnemyData.dat";
 
-	// ƒtƒHƒ‹ƒ_ì¬
-	try { std::filesystem::create_directories("Src/Data"); }
-	catch (...) {}
+	OutputDebugStringA("=== EnemyManager::LoadEnemyData START ===\n");
+
+	// ãƒ•ã‚©ãƒ«ãƒ€ä½œæˆ
+	try {
+		std::filesystem::create_directories("Src/Data");
+		OutputDebugStringA("[OK] Directory created or already exists.\n");
+	}
+	catch (const std::exception& e) {
+		OutputDebugStringA("[ERROR] Folder creation failed: ");
+		OutputDebugStringA(e.what());
+		OutputDebugStringA("\n");
+	}
 
 	std::ifstream jsonFile(jsonPath);
 	if (jsonFile.is_open()) {
-		// --- yŠJ”­ƒ‚[ƒhzJSON‚©‚ç“Ç‚İ‚İ ---
+		OutputDebugStringA("[OK] JSON file opened successfully.\n");
+
 		nlohmann::json data;
 		try {
 			jsonFile >> data;
+			OutputDebugStringA("[OK] JSON parsed successfully.\n");
+
+			int count = 0;
 			for (auto& e : data) {
-				if (!e.contains("id")) continue;
-				::EnemyData tempData;
+				if (!e.contains("id")) {
+					OutputDebugStringA("[WARN] Skipping entry without 'id' field.\n");
+					continue;
+				}
+
+				EnemyData tempData;
 				tempData.id = e["id"];
-				tempData.typeID = e.value("typeID", 0);
 				tempData.name = e.value("name", "Unknown");
+				tempData.typeID = e.value("typeID", 0);
 				tempData.mPath = e.value("mPath", "");
 				tempData.hp = e.value("hp", 100);
 				tempData.atk = e.value("atk", 10);
 				tempData.def = e.value("def", 5);
 				tempData.exp = e.value("exp", 0);
-				tempData.spd = e.value("spd", 1.0f);
-				tempData.cRate = e.value("cRate", 0.05f);
-				tempData.cDamageRate = e.value("cDamageRate", 1.5f);
-				tempData.rAngle = e.value("rAngle", 0.0f);
+				tempData.spd = static_cast<int>(e.value("spd", 0));
+				tempData.cRate = e.value("cRate", 0);
+				tempData.cDamageRate = e.value("cDamageRate", 0);
+				tempData.rAngle = e.value("rAngle", 0);
 				tempData.rCount = e.value("rCount", 0);
-				tempData.rLenght = e.value("rLenght", 0.0f);
+				tempData.rLenght = e.value("rLenght", 0);
 				enemyTable[tempData.id] = tempData;
+				count++;
 			}
-			// DAT‚ğXV•Û‘¶
+
+			char debugMsg[256];
+			sprintf_s(debugMsg, "[OK] Loaded %d enemy entries from JSON.\n", count);
+			OutputDebugStringA(debugMsg);
+
+			// âœ… DAT ä¿å­˜å‡¦ç†
 			std::ofstream outFile(datPath, std::ios::binary);
 			if (outFile.is_open()) {
-				msgpack::pack(outFile, enemyTable);
-				OutputDebugStringA("EnemyManager: DAT updated from JSON.\n");
+				OutputDebugStringA("[OK] DAT file opened for writing.\n");
+
+				try {
+					msgpack::pack(outFile, enemyTable);
+					outFile.close();
+					OutputDebugStringA("[SUCCESS] DAT file saved successfully!\n");
+				}
+				catch (const std::exception& e) {
+					OutputDebugStringA("[ERROR] msgpack::pack failed: ");
+					OutputDebugStringA(e.what());
+					OutputDebugStringA("\n");
+					outFile.close();
+				}
+			}
+			else {
+				OutputDebugStringA("[ERROR] Failed to open DAT file for writing.\n");
 			}
 		}
-		catch (...) { OutputDebugStringA("EnemyManager: JSON Parse Error!\n"); }
+		catch (const nlohmann::json::exception& e) {
+			OutputDebugStringA("[ERROR] JSON parsing failed: ");
+			OutputDebugStringA(e.what());
+			OutputDebugStringA("\n");
+		}
+		catch (const std::exception& e) {
+			OutputDebugStringA("[ERROR] Exception during JSON processing: ");
+			OutputDebugStringA(e.what());
+			OutputDebugStringA("\n");
+		}
+		jsonFile.close();
 	}
 	else {
-		// --- y»•iƒ‚[ƒhzDAT‚©‚ç“Ç‚İ‚İ ---
+		OutputDebugStringA("[ERROR] JSON file NOT found!\n");
+
+		// ==========================================
+		// ã€è£½å“ãƒ¢ãƒ¼ãƒ‰ã€‘ãƒã‚¤ãƒŠãƒª(.dat)ã‹ã‚‰èª­ã¿è¾¼ã¿
+		// ==========================================
+		
 		std::ifstream datFile(datPath, std::ios::binary);
-		if (datFile.is_open()) {
-			// ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ğŠm”F
-			datFile.seekg(0, std::ios::end);
-			size_t size = datFile.tellg();
-			datFile.seekg(0, std::ios::beg);
-
-			if (size > 0) {
-				std::vector<char> buffer(size);
-				datFile.read(buffer.data(), size);
-				try {
-					// msgpack‚ÌƒfƒVƒŠƒAƒ‰ƒCƒY‚ğ–¾¦“I‚És‚¤
-					msgpack::object_handle oh = msgpack::unpack(buffer.data(), buffer.size());
-					oh.get().convert(enemyTable);
-
-					// šŠm”F—pF’†g‚ª‹ó‚È‚ç‹©‚Ô
-					if (enemyTable.empty()) {
-						OutputDebugStringA("EnemyManager: DAT was empty after unpack!\n");
-					}
-					else {
-						OutputDebugStringA("EnemyManager: DAT loaded successfully.\n");
-					}
-				}
-				catch (...) {
-					OutputDebugStringA("EnemyManager: DAT unpack FAILED (Structure mismatch).\n");
-				}
-			}
+		if (!datFile.is_open()) {
+			OutputDebugStringA("EnemyManager: CRITICAL - DAT file missing!\n");
+			return;
 		}
-		else {
-			OutputDebugStringA("EnemyManager: CRITICAL - JSON and DAT both missing!\n");
+
+		datFile.seekg(0, std::ios::end);
+		size_t fileSize = static_cast<size_t>(datFile.tellg());
+		datFile.seekg(0, std::ios::beg);
+
+		if (fileSize == 0) {
+			OutputDebugStringA("EnemyManager: Error - DAT file is empty!\n");
+			datFile.close();
+			return;
 		}
+
+		std::vector<char> buffer(fileSize);
+		datFile.read(buffer.data(), fileSize);
+		datFile.close();
+
+		try {
+			msgpack::object_handle oh = msgpack::unpack(buffer.data(), buffer.size());
+			msgpack::object obj = oh.get();
+
+			enemyTable.clear();
+			obj.convert(enemyTable);
+
+			char debugMsg[128];
+			sprintf_s(debugMsg, "EnemyManager: DAT loaded successfully. (Size: %zu)\n", enemyTable.size());
+			OutputDebugStringA(debugMsg);
+		}
+		catch (const std::exception& e) {
+			OutputDebugStringA("EnemyManager: DAT unpack FAILED! (Structure mismatch or Corrupted data)\n");
+			OutputDebugStringA("Reason: ");
+			OutputDebugStringA(e.what());
+			OutputDebugStringA("\n");
+		}
+		catch (...) {
+			OutputDebugStringA("EnemyManager: DAT unpack FAILED (Unknown Error).\n");
+		}
+		
 	}
+
+	OutputDebugStringA("=== EnemyManager::LoadEnemyData END ===\n");
 }
+
 EnemyData* EnemyManager::GetEnemyData(int id) {
-	auto it = enemyTable.find(id);
-	if (it != enemyTable.end()) {
-		return &(it->second);
-	}
-	return nullptr;
+	if (enemyTable.count(id) == 0) return nullptr;
+	return &enemyTable[id];
 }

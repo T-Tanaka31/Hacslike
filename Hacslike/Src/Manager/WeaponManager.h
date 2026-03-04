@@ -6,10 +6,6 @@
 #include "../Definition.h"
 #include <DxLib.h> // DxLibのヘッダ
 #include <msgpack.hpp>
-// 定数定義（WeaponManager.hなどにある想定）
-#define ATTACK_SPEED_NUM 4
-#define COL_LENGTH_NUM 3
-#define COL_RADIUS_NUM 3
 
 struct WeaponData {
     int id;

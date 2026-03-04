@@ -45,11 +45,6 @@ void GameScene::Start() {
 	EffectManager::GetInstance().Load("Res/Effect/Item.efkefc", "Item", 10.0f);
 	EffectManager::GetInstance().Load("Res/Effect/Explosion.efkefc", "Explosion", 20.0f);
 
-
-
-
-
-
 }
 
 void GameScene::Update() {

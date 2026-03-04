@@ -88,6 +88,7 @@
     <ClInclude Include="Src\Manager\FontManager.h" />
     <ClInclude Include="Src\Manager\InputManager.h" />
     <ClInclude Include="Src\Manager\ItemDropManager.h" />
+    <ClInclude Include="Src\Manager\LightManager.h" />
     <ClInclude Include="Src\Manager\SalesManager.h" />
     <ClInclude Include="Src\Manager\SaveManager.h" />
     <ClInclude Include="Src\Manager\SceneManager.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="Src\Manager\FontManager.cpp" />
     <ClCompile Include="Src\Manager\InputManager.cpp" />
     <ClCompile Include="Src\Manager\ItemDropManager.cpp" />
+    <ClCompile Include="Src\Manager\LightManager.cpp" />
     <ClCompile Include="Src\Manager\SalesManager.cpp" />
     <ClCompile Include="Src\Manager\SaveManager.cpp" />
     <ClCompile Include="Src\Manager\SceneManager.cpp" />
@@ -270,6 +272,8 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/../Dxlib; $(SolutionDir)External</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -289,6 +293,8 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/../Dxlib; $(SolutionDir)External</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -308,6 +314,8 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/../Dxlib; $(SolutionDir)External</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -327,6 +335,8 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/../Dxlib; $(SolutionDir)External</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
