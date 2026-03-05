@@ -358,17 +358,6 @@ void DuraHammmer::LoadFrom(BinaryReader& r)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 #pragma region èe
 gun::gun(VECTOR _pos, const std::string& _name, const std::string& _desc, int _value, int _effectValue, const std::string& _weaponType)
 	: ItemBase(VZero, "item", "Gun", _name, _desc, "Equipment", "Normal", _value, _effectValue, "Res/ItemIcon/Gun.png")

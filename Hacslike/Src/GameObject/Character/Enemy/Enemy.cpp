@@ -30,6 +30,8 @@ Enemy::Enemy()
 	,attack03ColliderSpawnTime(0)
 	,deadAnimationTime(0)
 	,isBack(false)
+	, type()
+	, point()
 {}
 
 Enemy::~Enemy() {
@@ -413,8 +415,8 @@ bool Enemy::WallDetectionVision_Fan(VECTOR targetPos) {
 
 		// Bresenham ‚ÌŒë·ŒvŽZ‚ÅŽŸ‚ÌƒZƒ‹‚Öi‚Þ
 		int e2 = 2 * err;
-		if (e2 > -dir.z) { err -= dir.z; x0 += scale.x; }
-		if (e2 < dir.x) { err += dir.x; z0 += scale.z; }
+		if (e2 > -dir.z) { err -= (int)dir.z; x0 += (int)scale.x; }
+		if (e2 < dir.x) { err += (int)dir.x; z0 += (int)scale.z; }
 	}
 
 	// ÅŒã‚Ü‚Å•Ç‚É“–‚½‚ç‚È‚¯‚ê‚Î true
@@ -631,7 +633,7 @@ void Enemy::DrawVisionFanDebug() {
 void Enemy::Attack() {
 	if (atkTime >= atkSpan) {
 		atkTime = 0;
-		int rand = Random(0, attackAnimationList.size() - 1);
+		int rand = Random(0, (int)attackAnimationList.size() - 1);
 		pAnimator->Play(attackAnimationList[rand]);
 		atkSpan = Random(0,4);
 	}

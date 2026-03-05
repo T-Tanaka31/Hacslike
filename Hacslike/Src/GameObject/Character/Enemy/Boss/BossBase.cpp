@@ -7,7 +7,9 @@
 #include "../../../Returner/TitleReturner.h"
 
 BossBase::BossBase(VECTOR _appearPos)
-	:appearPos(_appearPos) {
+	:appearPos(_appearPos)
+	, attackSpanBar(NULL)
+	, circlePos(VZero){
 }
 
 BossBase::~BossBase() {
@@ -109,7 +111,7 @@ void BossBase::Render() {
 	if (!isDead && rayAnswer) {
 		hpBar->Render();
 		attackSpanBar->Render();
-		DrawStringToHandle(WINDOW_WIDTH / 4, 800.0f - 20, name.c_str(), white,MainFont);
+		DrawStringToHandle(WINDOW_WIDTH / 4, 800 - 20, name.c_str(), white,MainFont);
 		
 	}
 	if(isDead) BossSlainUI::GetInstance()->Draw();

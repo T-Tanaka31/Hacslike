@@ -71,27 +71,27 @@ public:
 		}
 
 		// 背景
-		DrawBox(posX, posY, posX + width, posY + height, bottomColor, true);
+		DrawBoxAA(posX, posY, posX + width, posY + height, bottomColor, true);
 		// 徐々に減るか
 		if (isDecrease) {
 			// 前よりゲージが減っているか
 			if (barWidth < currentDecreaseValue) {
 				// 徐々に減る
-				DrawBox(posX, posY, posX + currentDecreaseValue, posY + height, backColor, true);
-				DrawBox(posX, posY, posX + barWidth, posY + height, topColor, true);
+				DrawBoxAA(posX, posY, posX + currentDecreaseValue, posY + height, backColor, true);
+				DrawBoxAA(posX, posY, posX + barWidth, posY + height, topColor, true);
 			}
 			else {
-				DrawBox(posX, posY, posX + barWidth, posY + height, backColor, true);
+				DrawBoxAA(posX, posY, posX + barWidth, posY + height, backColor, true);
 				// 徐々に増える
-				DrawBox(posX, posY, posX + currentDecreaseValue, posY + height, topColor, true);
+				DrawBoxAA(posX, posY, posX + currentDecreaseValue, posY + height, topColor, true);
 			}
 		}
 		else {
-			DrawBox(posX, posY, posX + barWidth, posY + height, topColor, true);
+			DrawBoxAA(posX, posY, posX + barWidth, posY + height, topColor, true);
 		}
 
 		// 枠
-		DrawBox(posX, posY, posX + width, posY + height, frameColor, false);
+		DrawBoxAA(posX, posY, posX + width, posY + height, frameColor, false);
 	}
 };
 

@@ -16,7 +16,7 @@
 #include "GameObject/Coin/Coin.h"
 #include "Manager/AudioManager.h"
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 #pragma region // DxLibの初期化処理　触るべからず
 	// ログファイルを残さない
 #if _DEBUG

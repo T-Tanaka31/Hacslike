@@ -33,14 +33,14 @@ public:
 
 private:
 
-	Gauge<int>* hpBar;
-	Gauge<float>* attackSpanBar;
+	Gauge<int>* hpBar = NULL;
+	Gauge<float>* attackSpanBar = NULL;
 
 protected:
 	// 階段が出現する位置
-	VECTOR appearPos;
+	VECTOR appearPos = VZero;
 	// 魔法陣が出る位置
-	VECTOR circlePos;
+	VECTOR circlePos = VZero;
 
 public:
 	inline void SetAppearPos(VECTOR pos) { appearPos = pos; }

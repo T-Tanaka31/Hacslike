@@ -1,0 +1,88 @@
+[
+  {
+    "id": "Sword_Iron",
+    "type": "Weapon",
+    "tag": "Item",
+    "name": "剣",
+    "desc": "普通の剣\n量産型",
+    "weaponID": 4,
+    "isRandom": true,
+    "price": 90,
+    "IconPath": "Res/ItemIcon/sword.png"
+  },
+
+  {
+    "id": "Axe",
+    "type": "Weapon",
+    "tag": "Item",
+    "name": "斧",
+    "desc": "普通の斧\n重くて切れ味がいい",
+    "weaponID": 3,
+    "isRandom": true,
+    "price": 100,
+    "IconPath": "Res/ItemIcon/Axe.png"
+  },
+
+  {
+    "id": "Stick",
+    "type": "Weapon",
+    "tag": "Item",
+    "name": "木の棒",
+    "desc": "そこら辺に落ちてる木の棒\n世界で一つの木の棒",
+    "weaponID": 10,
+    "isRandom": false,
+    "price": 10,
+    "IconPath": "Res/ItemIcon/stick.png"
+  },
+
+  {
+    "id": "GreatSword",
+    "type": "Weapon",
+    "tag": "Item",
+    "name": "グレートソード",
+    "desc": "グレートな剣\nため攻撃が可能",
+    "weaponID": 9,
+    "isRandom": true,
+    "price": 150,
+    "IconPath": "Res/ItemIcon/rune-sword.png"
+  },
+
+  {
+    "id": "Spear",
+    "type": "Weapon",
+    "tag": "Item",
+    "name": "槍",
+    "desc": "槍\nダッシュ攻撃で一網打尽",
+    "weaponID": 2,
+    "isRandom": true,
+    "price": 110,
+    "IconPath": "Res/ItemIcon/coiled-nail.png"
+  },
+
+  {
+    "id": "Hammer",
+    "type": "Weapon",
+    "tag": "Item",
+    "name": "ラッキーハンマー",
+    "desc": "オーガ戦の戦利品\n会心率をさげて会心ダメージを上げる",
+    "weaponID": 13,
+    "isRandom": true,
+    "price": 400,
+    "IconPath": "Res/ItemIcon/Hammer.png"
+  },
+
+  {
+    "id": "Sickle",
+    "type": "Weapon",
+    "tag": "Item",
+    "name": "凶悪な鎌",
+    "desc": "ゴブリンリーダー戦の戦利品\n会心率と会心ダメージを上げる",
+    "weaponID": 12,
+    "isRandom": true,
+    "price": 500,
+    "IconPath": "Res/ItemIcon/Sickle.png"
+  },
+
+
+
+]

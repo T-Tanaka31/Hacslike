@@ -13,7 +13,7 @@ protected:	// メンバ変数
 	bool atking;			// 攻撃フラグ
 	int def = 0;				// 防御力
 	bool blocking;			// 防御フラグ
-	int speed;
+	float speed;
 
 	float criticalHitRate;
 	float criticalDamage;
