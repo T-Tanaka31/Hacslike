@@ -1,22 +1,22 @@
-[
+ï»¿[
   {
     "id": "Sword_Iron",
     "type": "Weapon",
     "tag": "Item",
-    "name": "Œ•",
-    "desc": "•’Ê‚ÌŒ•\n—ÊYŒ^",
+    "name": "å‰£",
+    "desc": "æ™®é€šã®å‰£\né‡ç”£å‹",
     "weaponID": 4,
     "isRandom": true,
     "price": 90,
-    "IconPath": "Res/ItemIcon/sword.png"
+    "IconPath": "Res/ItemIcon/sword.png" 
   },
 
   {
     "id": "Axe",
     "type": "Weapon",
     "tag": "Item",
-    "name": "•€",
-    "desc": "•’Ê‚Ì•€\nd‚­‚ÄØ‚ê–¡‚ª‚¢‚¢",
+    "name": "æ–§",
+    "desc": "æ™®é€šã®æ–§\né‡ãã¦åˆ‡ã‚Œå‘³ãŒã„ã„",
     "weaponID": 3,
     "isRandom": true,
     "price": 100,
@@ -27,8 +27,8 @@
     "id": "Stick",
     "type": "Weapon",
     "tag": "Item",
-    "name": "–Ø‚Ì–_",
-    "desc": "‚»‚±‚ç•Ó‚É—‚¿‚Ä‚é–Ø‚Ì–_\n¢ŠE‚Åˆê‚Â‚Ì–Ø‚Ì–_",
+    "name": "æœ¨ã®æ£’",
+    "desc": "ãã“ã‚‰è¾ºã«è½ã¡ã¦ã‚‹æœ¨ã®æ£’\nä¸–ç•Œã§ä¸€ã¤ã®æœ¨ã®æ£’",
     "weaponID": 10,
     "isRandom": false,
     "price": 10,
@@ -39,8 +39,8 @@
     "id": "GreatSword",
     "type": "Weapon",
     "tag": "Item",
-    "name": "ƒOƒŒ[ƒgƒ\[ƒh",
-    "desc": "ƒOƒŒ[ƒg‚ÈŒ•\n‚½‚ßUŒ‚‚ª‰Â”\",
+    "name": "ã‚°ãƒ¬ãƒ¼ãƒˆã‚½ãƒ¼ãƒ‰",
+    "desc": "ã‚°ãƒ¬ãƒ¼ãƒˆãªå‰£\nãŸã‚æ”»æ’ƒãŒå¯èƒ½",
     "weaponID": 9,
     "isRandom": true,
     "price": 150,
@@ -51,8 +51,8 @@
     "id": "Spear",
     "type": "Weapon",
     "tag": "Item",
-    "name": "‘„",
-    "desc": "‘„\nƒ_ƒbƒVƒ…UŒ‚‚Åˆê–Ô‘Ås",
+    "name": "æ§",
+    "desc": "æ§\nãƒ€ãƒƒã‚·ãƒ¥æ”»æ’ƒã§ä¸€ç¶²æ‰“å°½",
     "weaponID": 2,
     "isRandom": true,
     "price": 110,
@@ -63,9 +63,9 @@
     "id": "Hammer",
     "type": "Weapon",
     "tag": "Item",
-    "name": "ƒ‰ƒbƒL[ƒnƒ“ƒ}[",
-    "desc": "ƒI[ƒKí‚Ìí—˜•i\n‰ïS—¦‚ğ‚³‚°‚Ä‰ïSƒ_ƒ[ƒW‚ğã‚°‚é",
-    "weaponID": 13,
+    "name": "ãƒ©ãƒƒã‚­ãƒ¼ãƒãƒ³ãƒãƒ¼",
+    "desc": "ã‚ªãƒ¼ã‚¬æˆ¦ã®æˆ¦åˆ©å“\nä¼šå¿ƒç‡ã‚’ã•ã’ã¦ä¼šå¿ƒãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸Šã’ã‚‹",
+    "weaponID": 11,
     "isRandom": true,
     "price": 400,
     "IconPath": "Res/ItemIcon/Hammer.png"
@@ -75,14 +75,36 @@
     "id": "Sickle",
     "type": "Weapon",
     "tag": "Item",
-    "name": "‹¥ˆ«‚ÈŠ™",
-    "desc": "ƒSƒuƒŠƒ“ƒŠ[ƒ_[í‚Ìí—˜•i\n‰ïS—¦‚Æ‰ïSƒ_ƒ[ƒW‚ğã‚°‚é",
+    "name": "å‡¶æ‚ªãªéŒ",
+    "desc": "ã‚´ãƒ–ãƒªãƒ³ãƒªãƒ¼ãƒ€ãƒ¼æˆ¦ã®æˆ¦åˆ©å“\nä¼šå¿ƒç‡ã¨ä¼šå¿ƒãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸Šã’ã‚‹",
     "weaponID": 12,
     "isRandom": true,
     "price": 500,
     "IconPath": "Res/ItemIcon/Sickle.png"
   },
 
+  {
+    "id": "FangSword",
+    "type": "Weapon",
+    "tag": "Item",
+    "name": "å‘ªã‚ã‚ŒãŸç‰™å‰£",
+    "desc": "ãƒ˜ãƒ«ãƒã‚¦ãƒ³ãƒ‰æˆ¦ã®æˆ¦åˆ©å“\né«˜ã„æ”»æ’ƒåŠ›ã‚’å¾—ã‚‰ã‚Œã‚‹ãŒè‡ªèº«ã®å‚·ã¤ã‘ã‚‹",
+    "weaponID": 14,
+    "isRandom": true,
+    "price": 300,
+    "IconPath": "Res/ItemIcon/FangSword.png"
+  },
 
+  {
+    "id": "DuraHammmer",
+    "type": "Weapon",
+    "tag": "Item",
+    "name": "ç¥æ–­ã®é‰„æ§Œ",
+    "desc": "ãƒ‡ãƒ¥ãƒ©ãƒãƒ³æˆ¦ã®æˆ¦åˆ©å“\né«˜ã„æ”»æ’ƒåŠ›ã‚’æŒã¡\nä¼šå¿ƒç‡ã¨ä¼šå¿ƒãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸Šã’ã‚‹",
+    "weaponID": 13,
+    "isRandom": true,
+    "price": 600,
+    "IconPath": "Res/ItemIcon/DuraHammmer.png"
+  }
 
 ]

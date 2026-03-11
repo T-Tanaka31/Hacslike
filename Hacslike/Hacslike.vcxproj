@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\LastBB\Hacslike\Hacslike\Src\Manager\ItemManager.h" />
     <ClInclude Include="Src\CommonModule.h" />
     <ClInclude Include="Src\Component\Animator.h" />
     <ClInclude Include="Src\Component\Collider\CapsuleHitBox.h" />
@@ -113,6 +114,7 @@
     <ClInclude Include="Src\UI\TitleUI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\LastBB\Hacslike\Hacslike\Src\Manager\ItemManager.cpp" />
     <ClCompile Include="Src\CommonModule.cpp" />
     <ClCompile Include="Src\Component\Animator.cpp" />
     <ClCompile Include="Src\Component\Collider\CapsuleHitBox.cpp" />

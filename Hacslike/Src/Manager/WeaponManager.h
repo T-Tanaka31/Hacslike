@@ -33,6 +33,8 @@ public:
 private:
     std::unordered_map<int, WeaponData> weaponTable;
 
+    void Start();
+
 public:
     void LoadWeapons();       // JSONロード＋モデルロード
     WeaponData* GetWeapon(int id);                   // IDで取得

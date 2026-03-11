@@ -2,28 +2,30 @@
 #include <fstream>
 #include <iostream>
 
-namespace fs = std::filesystem;
-
-WeaponManager::WeaponManager() {}
+WeaponManager::WeaponManager() {
+    Start();
+}
 WeaponManager::~WeaponManager() { UnloadAllWeapons(); }
+
+void WeaponManager::Start() {
+    LoadWeapons();
+}
 
 void WeaponManager::LoadWeapons() {
     UnloadAllWeapons();
 
-    // ファイル名に「s」を付けて統一
+    // jsonとdatのファイル名
     const std::string jsonPath = "Src/Data/WeaponsData.json";
     const std::string datPath = "Src/Data/WeaponsData.dat";
 
-    // フォルダの自動作成
+    // フォルダがなかったら自動作成
     try { std::filesystem::create_directories("Src/Data"); }
     catch (...) {}
 
     std::ifstream jsonFile(jsonPath);
 
     if (jsonFile.is_open()) {
-        // ==========================================
-        // 【開発モード】JSONから読み込み
-        // ==========================================
+        //  jsonからの読み込み
         nlohmann::json data;
         try {
             jsonFile >> data;
@@ -70,12 +72,10 @@ void WeaponManager::LoadWeapons() {
         }
     }
     else {
-        // ==========================================
-        // 【製品モード】バイナリ(.dat)から読み込み
-        // ==========================================
+        //  バイナリ(dat)からの読み込み
         std::ifstream datFile(datPath, std::ios::binary);
         if (!datFile.is_open()) return;
-
+        //  ファイルの中身をコピー
         std::vector<char> buffer((std::istreambuf_iterator<char>(datFile)), std::istreambuf_iterator<char>());
         datFile.close();
 

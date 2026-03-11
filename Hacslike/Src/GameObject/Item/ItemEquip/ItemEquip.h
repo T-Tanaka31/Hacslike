@@ -4,6 +4,13 @@
 
 class Player;
 
+class ItemWeapon : public ItemBase {
+private:
+	int attackValue;
+	int modelPath;
+	std::string weaponType;
+};
+
 #pragma region Œ•
 class ItemSword : public ItemBase
 {

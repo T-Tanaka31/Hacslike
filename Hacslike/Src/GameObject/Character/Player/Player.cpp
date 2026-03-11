@@ -236,7 +236,7 @@ void Player::Start() {
 
 	pAnimator->Play(0);
 
-	WeaponManager::GetInstance().LoadWeapons();
+	WeaponManager::GetInstance();
 	maxWeaponId = WeaponManager::GetInstance().GetMaxWeaponId();
 	changeWeaponButtonPressed = false;
 	currentWeaponId = 10;
@@ -1058,7 +1058,10 @@ void Player::NewPlayerSetUp() {
 }
 
 void Player::UpdateAtkFromEquipment() {
-	// 基本的にはインベントリの装備中アイテムを参照して effectValue を取得し、
+	// 基本的にはインベントリの装備中アイテムを参照して 
+	// 
+	// 
+	//  を取得し、
 // baseAttack + (近接 or 遠距離補正) + effectValue を atk に適用する。
 	if (!GetInventory()) {
 		// フォールバック: 基本攻撃力のみ
